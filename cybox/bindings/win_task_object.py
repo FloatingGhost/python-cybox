@@ -3,15 +3,16 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import email_message_object
 
 
 class TriggerListType(GeneratedsSuper):
     """The TriggerListType type specifies a set of triggers associated with
     the scheduled task."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Trigger=None):
@@ -81,7 +82,7 @@ class TriggerType(GeneratedsSuper):
     http://msdn.microsoft.com/en-
     us/library/windows/desktop/aa383868(v=vs.85).aspxThe enabled
     field specifies whether the trigger is enabled."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, enabled=None, Trigger_Begin=None, Trigger_Delay=None, Trigger_End=None, Trigger_Frequency=None, Trigger_Max_Run_Time=None, Trigger_Session_Change_Type=None, Trigger_Type=None):
@@ -228,7 +229,7 @@ class TriggerType(GeneratedsSuper):
 
 class TaskActionListType(GeneratedsSuper):
     """The TaskActionListType type specifies a list of task actions."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Action=None):
@@ -295,7 +296,7 @@ class TaskActionListType(GeneratedsSuper):
 
 class TaskActionType(GeneratedsSuper):
     """The TaskActionType type characterizes scheduled task actions."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Action_Type=None, Action_ID=None, IEmailAction=None, IComHandlerAction=None, IExecAction=None, IShowMessageAction=None):
@@ -413,7 +414,7 @@ class TaskActionType(GeneratedsSuper):
 
 class IComHandlerActionType(GeneratedsSuper):
     """The IComHandlerActionType type characterizes IComHandler actions."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, COM_Data=None, COM_Class_ID=None):
@@ -488,7 +489,7 @@ class IComHandlerActionType(GeneratedsSuper):
 
 class IExecActionType(GeneratedsSuper):
     """The IExecActionType type characterizes IExec actions."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Exec_Arguments=None, Exec_Program_Path=None, Exec_Working_Directory=None, Exec_Program_Hashes=None):
@@ -583,7 +584,7 @@ class IExecActionType(GeneratedsSuper):
 
 class IShowMessageActionType(GeneratedsSuper):
     """The IShowMessageActionType type characterizes IShowMessage actions."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Show_Message_Body=None, Show_Message_Title=None):
@@ -663,7 +664,7 @@ class TaskStatusType(cybox_common.BaseObjectPropertyType):
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -737,7 +738,7 @@ class TaskTriggerType(cybox_common.BaseObjectPropertyType):
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -811,7 +812,7 @@ class TaskTriggerFrequencyType(cybox_common.BaseObjectPropertyType):
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -884,7 +885,7 @@ class TaskPriorityType(cybox_common.BaseObjectPropertyType):
     for permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -957,7 +958,7 @@ class TaskFlagType(cybox_common.BaseObjectPropertyType):
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -1027,7 +1028,7 @@ class TaskActionTypeType(cybox_common.BaseObjectPropertyType):
     """The TaskActionTypeType characterizes the specific types of task
     actions.This attribute is optional and specifies the expected
     type for the value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -1097,7 +1098,7 @@ class WindowsTaskObjectType(cybox_common.ObjectPropertiesType):
     """The WindowsTaskObjectType type is intended to characterize Windows
     task scheduler tasks. See Also: http://msdn.microsoft.com/en-
     us/library/windows/desktop/aa381311(v=vs.85).aspx"""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, Status=None, Priority=None, Name=None, Application_Name=None, Parameters=None, Flags=None, Account_Name=None, Account_Run_Level=None, Account_Logon_Type=None, Creator=None, Creation_Date=None, Most_Recent_Run_Time=None, Exit_Code=None, Max_Run_Time=None, Next_Run_Time=None, Action_List=None, Trigger_List=None, Comment=None, Working_Directory=None, Work_Item_Data=None):
@@ -1581,7 +1582,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

@@ -3,18 +3,18 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import uri_object
 
 
 class URLLabelType(cybox_common.StringObjectPropertyType):
-
+    
     subclass = None
     superclass = None
-    def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None, extensiontype_=None):
-        # PROP: This is a BaseObjectPropertyType subclass
-        super(URLLabelType, self).__init__(obfuscation_algorithm_ref, refanging_transform_type, has_changed, delimiter, pattern_type, datatype, refanging_transform, is_case_sensitive, bit_mask, appears_random, observed_encoding, defanging_algorithm_ref, is_obfuscated, regex_syntax, apply_condition, trend, idref, is_defanged, id, condition, valueOf_, extensiontype_)
+    def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, pattern_type=None, datatype='string', refanging_transform=None, bit_mask=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', idref=None, is_defanged=None, id=None, condition=None, valueOf_=None, extensiontype_=None):
+        super(URLLabelType, self).__init__(obfuscation_algorithm_ref, refanging_transform_type, has_changed, pattern_type, datatype, refanging_transform, bit_mask, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, apply_condition, idref, is_defanged, id, condition, valueOf_, extensiontype_)
         pass
     def factory(*args_, **kwargs_):
         if URLLabelType.subclass:
@@ -98,14 +98,14 @@ class LinkObjectType(uri_object.URIObjectType):
         else:
             eol_ = ''
         showIndent(lwrite, level, pretty_print)
-        lwrite('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        lwrite('<%s%s%s' % ('LinkObj:', name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
         self.exportAttributes(lwrite, level, already_processed, 'LinkObj:', name_='LinkObjectType')
         if self.hasContent_():
             lwrite('>%s' % (eol_, ))
             self.exportChildren(lwrite, level + 1, 'LinkObj:', name_, pretty_print=pretty_print)
             showIndent(lwrite, level, pretty_print)
-            lwrite('</%s%s>%s' % (namespace_, name_, eol_))
+            lwrite('</%s%s>%s' % ('LinkObj:', name_, eol_))
         else:
             lwrite('/>%s' % (eol_, ))
     def exportAttributes(self, lwrite, level, already_processed, namespace_='LinkObj:', name_='LinkObjectType'):
@@ -190,7 +190,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

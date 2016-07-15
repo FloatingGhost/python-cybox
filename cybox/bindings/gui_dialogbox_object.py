@@ -3,15 +3,16 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import gui_object
 
 
 class GUIDialogboxObjectType(gui_object.GUIObjectType):
     """The GUIDialogboxObjectType type is intended to characterize GUI
     dialog boxes."""
-
+    
     subclass = None
     superclass = gui_object.GUIObjectType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, Height=None, Width=None, Box_Caption=None, Box_Text=None):
@@ -237,7 +238,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

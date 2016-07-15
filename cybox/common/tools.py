@@ -1,14 +1,13 @@
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-from mixbox import entities
-
+import cybox
 import cybox.bindings.cybox_common as common_binding
 from cybox.common import HashList, StructuredText, VocabString
 from cybox.common.vocabs import ToolType  # noqa
 
 
-class ToolInformation(entities.Entity):
+class ToolInformation(cybox.Entity):
     _binding = common_binding
     _binding_class = common_binding.ToolInformationType
     _namespace = 'http://cybox.mitre.org/common-2'
@@ -144,7 +143,7 @@ class ToolInformation(entities.Entity):
         return toolinfo
 
 
-class ToolInformationList(entities.EntityList):
+class ToolInformationList(cybox.EntityList):
     _binding_class = common_binding.ToolsInformationType
     _binding_var = "Tool"
     _contained_type = ToolInformation

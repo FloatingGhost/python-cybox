@@ -1,8 +1,9 @@
+from docutils import nodes
 from sphinx.ext.autodoc import AttributeDocumenter, ClassDocumenter
 from sphinx.util.pycompat import class_types
 
-from mixbox import entities
-from mixbox import fields
+import cybox
+
 
 
 def make_class_ref(cls):
@@ -17,7 +18,8 @@ class EntityDocumenter(ClassDocumenter):
     @classmethod
     def can_document_member(cls, member, membername, isattr, parent):
         return isinstance(member, class_types) and \
-               issubclass(member, entities.Entity)
+               issubclass(member, cybox.Entity)
+
 
     def add_content(self, more_content, no_docstring=False):
         ClassDocumenter.add_content(self, more_content, no_docstring)
@@ -37,7 +39,8 @@ class TypedFieldDocumenter(AttributeDocumenter):
 
     @classmethod
     def can_document_member(cls, member, membername, isattr, parent):
-        return isinstance(member, fields.TypedField)
+        return isinstance(member, cybox.TypedField)
+
 
     def add_content(self, more_content, no_docstring=False):
         AttributeDocumenter.add_content(self, more_content, no_docstring)

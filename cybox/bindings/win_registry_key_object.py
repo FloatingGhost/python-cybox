@@ -3,15 +3,16 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import win_handle_object
 
 
 class RegistryValueType(GeneratedsSuper):
     """The RegistryValueType type is intended to characterize Windows
     registry Value name/data pairs."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Name=None, Data=None, Datatype=None, Byte_Runs=None):
@@ -110,7 +111,7 @@ class RegistryValueType(GeneratedsSuper):
 class RegistryValuesType(GeneratedsSuper):
     """The RegistryValuesType type specifies the values (with their
     name/data pairs) held within the registry key."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Value=None):
@@ -178,7 +179,7 @@ class RegistryValuesType(GeneratedsSuper):
 class RegistrySubkeysType(GeneratedsSuper):
     """The RegistrySubkeysType specifies the set of subkeys contained under
     the registry key."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Subkey=None):
@@ -250,7 +251,7 @@ class RegistryHiveType(cybox_common.BaseObjectPropertyType):
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -323,7 +324,7 @@ class RegistryDatatypeType(cybox_common.BaseObjectPropertyType):
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -392,7 +393,7 @@ class RegistryDatatypeType(cybox_common.BaseObjectPropertyType):
 class WindowsRegistryKeyObjectType(cybox_common.ObjectPropertiesType):
     """The WindowsRegistryObjectType type is intended to characterize
     Windows registry objects, including Keys and Key/Value pairs."""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, Key=None, Hive=None, Number_Values=None, Values=None, Modified_Time=None, Creator_Username=None, Handle_List=None, Number_Subkeys=None, Subkeys=None, Byte_Runs=None):
@@ -716,7 +717,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

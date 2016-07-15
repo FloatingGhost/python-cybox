@@ -3,8 +3,9 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import win_handle_object
 
 
@@ -15,7 +16,7 @@ class PageProtectionAttributeType(cybox_common.BaseObjectPropertyType):
     type. Its base type is the CybOX Core cybox_common.BaseObjectPropertyType,
     for permitting complex (i.e. regular-expression based)
     specifications."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -452,7 +453,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

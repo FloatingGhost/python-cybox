@@ -3,14 +3,15 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import pipe_object
 
 
 class UnixPipeObjectType(pipe_object.PipeObjectType):
     """The UnixPipeObjectType type is intended to characterize Unix pipes."""
-
+    
     subclass = None
     superclass = pipe_object.PipeObjectType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, named=None, Name=None, Permission_Mode=None):
@@ -223,7 +224,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

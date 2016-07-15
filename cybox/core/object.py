@@ -3,9 +3,6 @@
 
 import sys
 
-from mixbox import entities
-from mixbox import idgen
-
 import cybox
 import cybox.bindings.cybox_core as core_binding
 from cybox.common import ObjectProperties, VocabString
@@ -31,7 +28,7 @@ def add_external_class(klass, name=None):
     setattr(module, name, klass)
 
 
-class Object(entities.Entity):
+class Object(cybox.Entity):
     """The CybOX Object element.
 
     Currently only supports the following data members:
@@ -50,7 +47,7 @@ class Object(entities.Entity):
             prefix = str(properties.__class__.__name__)
         else:
             prefix = "Object"
-        self.id_ = idgen.create_id(prefix=prefix)
+        self.id_ = cybox.utils.create_id(prefix=prefix)
         self.idref = None
         self.properties = properties
         self.related_objects = []
@@ -262,7 +259,7 @@ class RelatedObject(Object):
         return relobj
 
 
-class DomainSpecificObjectProperties(entities.Entity):
+class DomainSpecificObjectProperties(cybox.Entity):
     """The Cybox DomainSpecificObjectProperties base class."""
 
     def to_obj(self, return_obj=None, ns_info=None):

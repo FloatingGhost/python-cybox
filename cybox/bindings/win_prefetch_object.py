@@ -3,8 +3,9 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import device_object
 from . import win_volume_object
 
@@ -12,7 +13,7 @@ from . import win_volume_object
 class AccessedFileListType(GeneratedsSuper):
     """The AccessedFileListType specifies a list of files accessed by a
     prefetch application."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Accessed_Filename=None):
@@ -83,7 +84,7 @@ class AccessedFileListType(GeneratedsSuper):
 class AccessedDirectoryListType(GeneratedsSuper):
     """The AccessedDirectoryListType specifies a list of directories
     accessed by a prefetch application."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Accessed_Directory=None):
@@ -154,7 +155,7 @@ class AccessedDirectoryListType(GeneratedsSuper):
 class VolumeType(GeneratedsSuper):
     """VolumeType characterizes the volume information in the Windows
     prefetch file."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, VolumeItem=None, DeviceItem=None):
@@ -240,7 +241,7 @@ class WindowsPrefetchObjectType(cybox_common.ObjectPropertiesType):
     prefetching was introduced to speed up application startup. The
     prefetch object draws upon the descriptions and XML sample at
     http://www.forensicswiki.org/wiki/Prefetch_XML"""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, Application_File_Name=None, Prefetch_Hash=None, Times_Executed=None, First_Run=None, Last_Run=None, Volume=None, Accessed_File_List=None, Accessed_Directory_List=None):
@@ -553,7 +554,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

@@ -3,7 +3,7 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
 
 
@@ -13,7 +13,7 @@ class FilePathType(cybox_common.StringObjectPropertyType):
     be specified via the 'fully_qualified' attribute.The
     fully_qualified field specifies whether the path is fully
     qualified."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None, extensiontype_=None, fully_qualified=None):
@@ -86,7 +86,7 @@ class FileAttributeType(GeneratedsSuper):
     """The FileAttributeType type specifies attribute(s) of a file. Since
     this Object property(ies) is platform-specific, it is defined
     here as an abstract type."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, xsi_type = None):
@@ -145,7 +145,7 @@ class FilePermissionsType(GeneratedsSuper):
     this is a platform-specific Object property, it is defined here
     as an abstract type and then implemented in any platform
     specific derived file objects."""
-
+    
     subclass = None
     superclass = None
     def __init__(self):
@@ -196,7 +196,7 @@ class FilePermissionsType(GeneratedsSuper):
 
 class PackerListType(GeneratedsSuper):
     """The PackerListType type specifies a list of file packers."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Packer=None):
@@ -264,7 +264,7 @@ class PackerListType(GeneratedsSuper):
 class PackerType(GeneratedsSuper):
     """The PackerType specifies the fields that characterize a particular
     file packer, such as name and version."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Name=None, Version=None, Entry_Point=None, Signature=None, Type=None, Detected_Entrypoint_Signatures=None, EP_Jump_Codes=None):
@@ -395,7 +395,7 @@ class PackerType(GeneratedsSuper):
 
 class EPJumpCodeType(GeneratedsSuper):
     """Specifies an entry-point jump code used by a packer."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Depth=None, Opcodes=None):
@@ -473,7 +473,7 @@ class EPJumpCodeType(GeneratedsSuper):
 
 class EntryPointSignatureType(GeneratedsSuper):
     """Specifies an entry point signature for a packer."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Name=None, Type=None):
@@ -544,14 +544,14 @@ class EntryPointSignatureType(GeneratedsSuper):
             obj_.build(child_)
             self.set_Name(obj_)
         elif nodeName_ == 'Type':
-            Type = child_.text
-            Type = self.gds_validate_string(Type, node, 'Type')
-            self.Type = Type
+            obj_ = PackerClassType.factory()
+            obj_.build(child_)
+            self.set_Type(obj_)
 # end class EntryPointSignatureType
 
 class EntryPointSignatureListType(GeneratedsSuper):
     """Species a list of entry point signatures for a packer."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Entry_Point_Signature=None):
@@ -618,7 +618,7 @@ class EntryPointSignatureListType(GeneratedsSuper):
 
 class SymLinksListType(GeneratedsSuper):
     """The SymLinksListType specifies a list of symbolic links."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Sym_Link=None):
@@ -693,12 +693,11 @@ class PackerClassType(cybox_common.BaseObjectPropertyType):
     (i.e. regular-expression based) specifications.This field is
     optional and specifies the expected type for the value of the
     specified field."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
-    def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
-        # PROP: This is a BaseObjectPropertyType subclass
-        super(PackerClassType, self).__init__(obfuscation_algorithm_ref, refanging_transform_type, has_changed, delimiter, pattern_type, datatype, refanging_transform, is_case_sensitive, bit_mask, appears_random, observed_encoding, defanging_algorithm_ref, is_obfuscated, regex_syntax, apply_condition, trend, idref, is_defanged, id, condition, valueOf_)
+    def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, pattern_type=None, datatype='string', refanging_transform=None, bit_mask=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(PackerClassType, self).__init__(obfuscation_algorithm_ref, refanging_transform_type, has_changed, pattern_type, datatype, refanging_transform, bit_mask, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, apply_condition, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -764,7 +763,7 @@ class FileObjectType(cybox_common.ObjectPropertiesType):
     """The File_ObjectType type is intended to characterize generic
     files.The ispacked field is used to indicate whether the file is
     packed or not."""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, is_packed=None, is_masqueraded=None, File_Name=None, File_Path=None, Device_Path=None, Full_Path=None, File_Extension=None, Size_In_Bytes=None, Magic_Number=None, File_Format=None, Hashes=None, Digital_Signatures=None, Modified_Time=None, Accessed_Time=None, Created_Time=None, File_Attributes_List=None, Permissions=None, User_Owner=None, Packer_List=None, Peak_Entropy=None, Sym_Links=None, Byte_Runs=None, Extracted_Features=None, Encryption_Algorithm=None, Decryption_Key=None, Compression_Method=None, Compression_Version=None, Compression_Comment=None):
@@ -1316,7 +1315,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

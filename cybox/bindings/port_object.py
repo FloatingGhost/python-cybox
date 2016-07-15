@@ -3,7 +3,7 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
 
 
@@ -14,12 +14,11 @@ class Layer4ProtocolType(cybox_common.BaseObjectPropertyType):
     for permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
-    def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
-        # PROP: This is a BaseObjectPropertyType subclass
-        super(Layer4ProtocolType, self).__init__(obfuscation_algorithm_ref, refanging_transform_type, has_changed, delimiter, pattern_type, datatype, refanging_transform, is_case_sensitive, bit_mask, appears_random, observed_encoding, defanging_algorithm_ref, is_obfuscated, regex_syntax, apply_condition, trend, idref, is_defanged, id, condition, valueOf_)
+    def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, pattern_type=None, datatype='string', refanging_transform=None, bit_mask=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(Layer4ProtocolType, self).__init__(obfuscation_algorithm_ref, refanging_transform_type, has_changed, pattern_type, datatype, refanging_transform, bit_mask, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, apply_condition, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -84,7 +83,7 @@ class Layer4ProtocolType(cybox_common.BaseObjectPropertyType):
 class PortObjectType(cybox_common.ObjectPropertiesType):
     """The PortObjectType type is intended to characterize networking
     ports."""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, Port_Value=None, Layer4_Protocol=None):
@@ -309,7 +308,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

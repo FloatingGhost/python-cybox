@@ -1,100 +1,101 @@
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-from __future__ import absolute_import
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
 
+from .cybox_common import ControlledVocabularyStringType
+
 #Object Imports
-from .account_object import AccountObjectType
-from .address_object import AddressObjectType
-from .api_object import APIObjectType
-from .archive_file_object import ArchiveFileObjectType
-from .arp_cache_object import ARPCacheObjectType
-from .artifact_object import ArtifactObjectType
-from .as_object import ASObjectType
-from .code_object import CodeObjectType
-from .custom_object import CustomObjectType
-from .device_object import DeviceObjectType
-from .disk_object import DiskObjectType
-from .disk_partition_object import DiskPartitionObjectType
-from .dns_cache_object import DNSCacheObjectType
-from .dns_query_object import DNSQueryObjectType
-from .dns_record_object import DNSRecordObjectType
-from .domain_name_object import DomainNameObjectType
-from .email_message_object import EmailMessageObjectType
-from .file_object import FileObjectType
-from .gui_dialogbox_object import GUIDialogboxObjectType
-from .gui_object import GUIObjectType
-from .gui_window_object import GUIWindowObjectType
-from .hostname_object import HostnameObjectType
-from .http_session_object import HTTPSessionObjectType
-from .image_file_object import ImageFileObjectType
-from .library_object import LibraryObjectType
-from .link_object import LinkObjectType
-from .linux_package_object import LinuxPackageObjectType
-from .memory_object import MemoryObjectType
-from .mutex_object import MutexObjectType
-from .network_connection_object import NetworkConnectionObjectType
-from .network_flow_object import NetworkFlowObjectType
-from .network_packet_object import NetworkPacketObjectType
-from .network_route_entry_object import NetworkRouteEntryObjectType
-from .network_route_object import NetRouteObjectType
-from .network_socket_object import NetworkSocketObjectType
-from .network_subnet_object import NetworkSubnetObjectType
-from .pdf_file_object import PDFFileObjectType
-from .pipe_object import PipeObjectType
-from .port_object import PortObjectType
-from .product_object import ProductObjectType
-from .process_object import ProcessObjectType
-from .semaphore_object import SemaphoreObjectType
-from .sms_message_object import SMSMessageObjectType
-from .socket_address_object import SocketAddressObjectType
-from .system_object import SystemObjectType
-from .unix_file_object import UnixFileObjectType
-from .unix_network_route_entry_object import UnixNetworkRouteEntryObjectType
-from .unix_pipe_object import UnixPipeObjectType
-from .unix_process_object import UnixProcessObjectType
-from .unix_user_account_object import UnixUserAccountObjectType
-from .unix_volume_object import UnixVolumeObjectType
-from .uri_object import URIObjectType
-from .url_history_object import URLHistoryObjectType
-from .user_account_object import UserAccountObjectType
-from .volume_object import VolumeObjectType
-from .whois_object import WhoisObjectType
-from .win_computer_account_object import WindowsComputerAccountObjectType
-from .win_critical_section_object import WindowsCriticalSectionObjectType
-from .win_driver_object import WindowsDriverObjectType
-from .win_event_log_object import WindowsEventLogObjectType
-from .win_event_object import WindowsEventObjectType
-from .win_executable_file_object import WindowsExecutableFileObjectType
-from .win_file_object import WindowsFileObjectType
-from .win_filemapping_object import WindowsFilemappingObjectType
-from .win_handle_object import WindowsHandleObjectType
-from .win_hook_object import WindowsHookObjectType
-from .win_kernel_hook_object import WindowsKernelHookObjectType
-from .win_kernel_object import WindowsKernelObjectType
-from .win_mailslot_object import WindowsMailslotObjectType
-from .win_memory_page_region_object import WindowsMemoryPageRegionObjectType
-from .win_mutex_object import WindowsMutexObjectType
-from .win_network_route_entry_object import WindowsNetworkRouteEntryObjectType
-from .win_network_share_object import WindowsNetworkShareObjectType
-from .win_pipe_object import WindowsPipeObjectType
-from .win_prefetch_object import WindowsPrefetchObjectType
-from .win_process_object import WindowsProcessObjectType
-from .win_registry_key_object import WindowsRegistryKeyObjectType
-from .win_semaphore_object import WindowsSemaphoreObjectType
-from .win_service_object import WindowsServiceObjectType
-from .win_system_object import WindowsSystemObjectType
-from .win_system_restore_object import WindowsSystemRestoreObjectType
-from .win_task_object import WindowsTaskObjectType
-from .win_thread_object import WindowsThreadObjectType
-from .win_user_account_object import WindowsUserAccountObjectType
-from .win_volume_object import WindowsVolumeObjectType
-from .win_waitable_timer_object import WindowsWaitableTimerObjectType
-from .x509_certificate_object import X509CertificateObjectType
+from cybox.bindings.account_object import AccountObjectType
+from cybox.bindings.address_object import AddressObjectType
+from cybox.bindings.api_object import APIObjectType
+from cybox.bindings.archive_file_object import ArchiveFileObjectType
+from cybox.bindings.arp_cache_object import ARPCacheObjectType
+from cybox.bindings.artifact_object import ArtifactObjectType
+from cybox.bindings.as_object import ASObjectType
+from cybox.bindings.code_object import CodeObjectType
+from cybox.bindings.custom_object import CustomObjectType
+from cybox.bindings.device_object import DeviceObjectType
+from cybox.bindings.disk_object import DiskObjectType
+from cybox.bindings.disk_partition_object import DiskPartitionObjectType
+from cybox.bindings.dns_cache_object import DNSCacheObjectType
+from cybox.bindings.dns_query_object import DNSQueryObjectType
+from cybox.bindings.dns_record_object import DNSRecordObjectType
+from cybox.bindings.domain_name_object import DomainNameObjectType
+from cybox.bindings.email_message_object import EmailMessageObjectType
+from cybox.bindings.file_object import FileObjectType
+from cybox.bindings.gui_dialogbox_object import GUIDialogboxObjectType
+from cybox.bindings.gui_object import GUIObjectType
+from cybox.bindings.gui_window_object import GUIWindowObjectType
+from cybox.bindings.hostname_object import HostnameObjectType
+from cybox.bindings.http_session_object import HTTPSessionObjectType
+from cybox.bindings.image_file_object import ImageFileObjectType
+from cybox.bindings.library_object import LibraryObjectType
+from cybox.bindings.link_object import LinkObjectType
+from cybox.bindings.linux_package_object import LinuxPackageObjectType
+from cybox.bindings.memory_object import MemoryObjectType
+from cybox.bindings.mutex_object import MutexObjectType
+from cybox.bindings.network_connection_object import NetworkConnectionObjectType
+from cybox.bindings.network_flow_object import NetworkFlowObjectType
+from cybox.bindings.network_packet_object import NetworkPacketObjectType
+from cybox.bindings.network_route_entry_object import NetworkRouteEntryObjectType
+from cybox.bindings.network_route_object import NetRouteObjectType
+from cybox.bindings.network_socket_object import NetworkSocketObjectType
+from cybox.bindings.network_subnet_object import NetworkSubnetObjectType
+from cybox.bindings.pdf_file_object import PDFFileObjectType
+from cybox.bindings.pipe_object import PipeObjectType
+from cybox.bindings.port_object import PortObjectType
+from cybox.bindings.product_object import ProductObjectType
+from cybox.bindings.process_object import ProcessObjectType
+from cybox.bindings.semaphore_object import SemaphoreObjectType
+from cybox.bindings.sms_message_object import SMSMessageObjectType
+from cybox.bindings.socket_address_object import SocketAddressObjectType
+from cybox.bindings.system_object import SystemObjectType
+from cybox.bindings.unix_file_object import UnixFileObjectType
+from cybox.bindings.unix_network_route_entry_object import UnixNetworkRouteEntryObjectType
+from cybox.bindings.unix_pipe_object import UnixPipeObjectType
+from cybox.bindings.unix_process_object import UnixProcessObjectType
+from cybox.bindings.unix_user_account_object import UnixUserAccountObjectType
+from cybox.bindings.unix_volume_object import UnixVolumeObjectType
+from cybox.bindings.uri_object import URIObjectType
+from cybox.bindings.url_history_object import URLHistoryObjectType
+from cybox.bindings.user_account_object import UserAccountObjectType
+from cybox.bindings.volume_object import VolumeObjectType
+from cybox.bindings.whois_object import WhoisObjectType
+from cybox.bindings.win_computer_account_object import WindowsComputerAccountObjectType
+from cybox.bindings.win_critical_section_object import WindowsCriticalSectionObjectType
+from cybox.bindings.win_driver_object import WindowsDriverObjectType
+from cybox.bindings.win_event_log_object import WindowsEventLogObjectType
+from cybox.bindings.win_event_object import WindowsEventObjectType
+from cybox.bindings.win_executable_file_object import WindowsExecutableFileObjectType
+from cybox.bindings.win_file_object import WindowsFileObjectType
+from cybox.bindings.win_filemapping_object import WindowsFilemappingObjectType
+from cybox.bindings.win_handle_object import WindowsHandleObjectType
+from cybox.bindings.win_hook_object import WindowsHookObjectType
+from cybox.bindings.win_kernel_hook_object import WindowsKernelHookObjectType
+from cybox.bindings.win_kernel_object import WindowsKernelObjectType
+from cybox.bindings.win_mailslot_object import WindowsMailslotObjectType
+from cybox.bindings.win_memory_page_region_object import WindowsMemoryPageRegionObjectType
+from cybox.bindings.win_mutex_object import WindowsMutexObjectType
+from cybox.bindings.win_network_route_entry_object import WindowsNetworkRouteEntryObjectType
+from cybox.bindings.win_network_share_object import WindowsNetworkShareObjectType
+from cybox.bindings.win_pipe_object import WindowsPipeObjectType
+from cybox.bindings.win_prefetch_object import WindowsPrefetchObjectType
+from cybox.bindings.win_process_object import WindowsProcessObjectType
+from cybox.bindings.win_registry_key_object import WindowsRegistryKeyObjectType
+from cybox.bindings.win_semaphore_object import WindowsSemaphoreObjectType
+from cybox.bindings.win_service_object import WindowsServiceObjectType
+from cybox.bindings.win_system_object import WindowsSystemObjectType
+from cybox.bindings.win_system_restore_object import WindowsSystemRestoreObjectType
+from cybox.bindings.win_task_object import WindowsTaskObjectType
+from cybox.bindings.win_thread_object import WindowsThreadObjectType
+from cybox.bindings.win_user_account_object import WindowsUserAccountObjectType
+from cybox.bindings.win_volume_object import WindowsVolumeObjectType
+from cybox.bindings.win_waitable_timer_object import WindowsWaitableTimerObjectType
+from cybox.bindings.x509_certificate_object import X509CertificateObjectType
 
 
 class ObservablesType(GeneratedsSuper):
@@ -226,7 +227,7 @@ class ObservableType(GeneratedsSuper):
     Observable defined elsewhere.The negate field, when set to true,
     indicates the absence (rather than the presence) of the given
     Observable in a CybOX pattern."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, negate=False, idref=None, id=None, sighting_count=None, Title=None, Description=None, Keywords=None, Observable_Source=None, Object=None, Event=None, Observable_Composition=None, Pattern_Fidelity=None):
@@ -237,10 +238,10 @@ class ObservableType(GeneratedsSuper):
         self.Title = Title
         self.Description = Description
         self.Keywords = Keywords
-
-        if Observable_Source is None:
+        
+        if Observable_Source is None: 
             self.Observable_Source = []
-        else:
+        else: 
             self.Observable_Source = Observable_Source
 
         self.Object = Object
@@ -347,7 +348,7 @@ class ObservableType(GeneratedsSuper):
             self.Observable_Composition.export(lwrite, level, 'cybox:', name_='Observable_Composition', pretty_print=pretty_print)
         if self.Pattern_Fidelity is not None:
             self.Pattern_Fidelity.export(lwrite, level, 'cybox:', name_='Pattern_Fidelity', pretty_print=pretty_print)
-
+            
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -425,7 +426,7 @@ class EventType(GeneratedsSuper):
     received).The id field specifies a unique id for this Event.The
     idref field specifies a unique id reference to an Event defined
     elsewhere."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, idref=None, id=None, Type=None, Description=None, Observation_Method=None, Actions=None, Location=None, Frequency=None, Event=None):
@@ -521,7 +522,7 @@ class EventType(GeneratedsSuper):
             self.Frequency.export(lwrite, level, 'cybox:', name_='Frequency', pretty_print=pretty_print)
         for Event_ in self.Event:
             Event_.export(lwrite, level, 'cybox:', name_='Event', pretty_print=pretty_print)
-
+            
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -564,13 +565,13 @@ class EventType(GeneratedsSuper):
                     type_name_ = type_names_[0]
                 else:
                     type_name_ = type_names_[1]
-
+            
                 if type_name_ == "CIQAddress3.0InstanceType":
-                    from .extensions.location import ciq_address_3_0 as ciq_address_binding
+                    import cybox.bindings.extensions.location.ciq_address_3_0 as ciq_address_binding
                     obj_ = ciq_address_binding.CIQAddress3_0InstanceType.factory()
             else:
                 obj_ = cybox_common.LocationType.factory() # IdentityType is not abstract
-
+            
             obj_.build(child_)
             self.set_Location(obj_)
         elif nodeName_ == 'Frequency':
@@ -594,7 +595,7 @@ class FrequencyType(GeneratedsSuper):
     leveraged within an event or action pattern observable
     triggering on the matching of a specified trend in the frequency
     of an event or action."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, units=None, trend=None, rate=None, scale=None):
@@ -687,7 +688,7 @@ class FrequencyType(GeneratedsSuper):
 class ActionsType(GeneratedsSuper):
     """The ActionsType is a complex type representing a set of cyber
     observable actions."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Action=None):
@@ -764,7 +765,7 @@ class ActionType(GeneratedsSuper):
     operational context in which the Action is relevantThe timestamp
     field represents the local or relative time at which the action
     occurred or was observed."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, timestamp_precision='second', timestamp=None, action_status=None, ordinal_position=None, context=None, idref=None, id=None, Type=None, Name=None, Description=None, Action_Aliases=None, Action_Arguments=None, Location=None, Discovery_Method=None, Associated_Objects=None, Relationships=None, Frequency=None):
@@ -903,7 +904,7 @@ class ActionType(GeneratedsSuper):
             self.Relationships.export(lwrite, level, 'cybox:', name_='Relationships', pretty_print=pretty_print)
         if self.Frequency is not None:
             self.Frequency.export(lwrite, level, 'cybox:', name_='Frequency', pretty_print=pretty_print)
-
+    
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -974,13 +975,13 @@ class ActionType(GeneratedsSuper):
                     type_name_ = type_names_[0]
                 else:
                     type_name_ = type_names_[1]
-
+            
                 if type_name_ == "CIQAddress3.0InstanceType":
-                    from .extensions.location import iq_address_3_0 as ciq_address_binding
+                    import cybox.bindings.extensions.location.ciq_address_3_0 as ciq_address_binding
                     obj_ = ciq_address_binding.CIQAddress3_0InstanceType.factory()
             else:
                 obj_ = cybox_common.LocationType.factory() # IdentityType is not abstract
-
+            
             obj_.build(child_)
             self.set_Location(obj_)
         elif nodeName_ == 'Discovery_Method':
@@ -1004,7 +1005,7 @@ class ActionType(GeneratedsSuper):
 class ActionAliasesType(GeneratedsSuper):
     """The ActionAliasesType enables identification of other potentially
     used names for this Action."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Action_Alias=None):
@@ -1073,7 +1074,7 @@ class ActionAliasesType(GeneratedsSuper):
 class ActionArgumentsType(GeneratedsSuper):
     """The ActionArgumentsType enables the specification of relevant
     arguments/parameters for this Action."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Action_Argument=None):
@@ -1214,7 +1215,7 @@ class ActionArgumentType(GeneratedsSuper):
 class AssociatedObjectsType(GeneratedsSuper):
     """The AssociatedObjectsType enables the description/specification of
     cyber Objects relevant to an Action."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Associated_Object=None):
@@ -1283,7 +1284,7 @@ class ActionPertinentObjectPropertiesType(GeneratedsSuper):
     """The ActionPertinentObjectPropertiesType identifies which of the
     Properties of this Object are specifically pertinent to this
     Action."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Property=None):
@@ -1424,7 +1425,7 @@ class ActionPertinentObjectPropertyType(GeneratedsSuper):
 class ActionRelationshipsType(GeneratedsSuper):
     """The ActionRelationshipsType enables description of other cyber observable
     actions that are related to this Action."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Relationship=None):
@@ -1571,7 +1572,7 @@ class ActionReferenceType(GeneratedsSuper):
     """ActionReferenceType is intended to serve as a method for linking to
     actions.The action_id field refers to the id of the action being
     referenced."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, action_id=None):
@@ -1825,13 +1826,13 @@ class ObjectType(GeneratedsSuper):
                     type_name_ = type_names_[0]
                 else:
                     type_name_ = type_names_[1]
-
+            
                 if type_name_ == "CIQAddress3.0InstanceType":
-                    from .extensions.location import ciq_address_3_0 as ciq_address_binding
+                    import cybox.bindings.extensions.location.ciq_address_3_0 as ciq_address_binding
                     obj_ = ciq_address_binding.CIQAddress3_0InstanceType.factory()
             else:
                 obj_ = cybox_common.LocationType.factory() # IdentityType is not abstract
-
+            
             obj_.build(child_)
             self.set_Location(obj_)
         elif nodeName_ == 'Related_Objects':
@@ -1870,7 +1871,7 @@ class DomainSpecificObjectPropertiesType(GeneratedsSuper):
     This enables domains utilizing CybOX such as malware analysis or
     forensics to incorporate non-generalized object metadata from
     their domains into CybOX objects."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, xsi_type = None):
@@ -1930,7 +1931,7 @@ class RelatedObjectsType(GeneratedsSuper):
     """The RelatedObjectsType enables the identification and/or
     specification of Objects with relevant relationships with this
     Object."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Related_Object=None):
@@ -1999,7 +2000,7 @@ class RelatedObjectType(ObjectType):
     """The RelatedObjectType enables the identification and/or
     specification of an Object with a relevant relationship with
     this Object."""
-
+    
     subclass = None
     superclass = ObjectType
     def __init__(self, has_changed=None, idref=None, id=None, State=None, Description=None, Properties=None, Domain_Specific_Object_Properties=None, Location=None, Related_Objects=None, Defined_Effect=None, Discovery_Method=None, Relationship=None):
@@ -2057,7 +2058,7 @@ class RelatedObjectType(ObjectType):
         super(RelatedObjectType, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Relationship':
-            obj_ = cybox_common.ControlledVocabularyStringType.factory()
+            obj_ = ControlledVocabularyStringType.factory()
             obj_.build(child_)
             self.set_Relationship(obj_)
         super(RelatedObjectType, self).buildChildren(child_, node, nodeName_, True)
@@ -2074,7 +2075,7 @@ class DefinedEffectType(GeneratedsSuper):
     DefinedEffectType) are maintained as part of the core CybOX
     schema.The effect_type field specifies the nature of the Defined
     Effect instantiated in the place of the Defined_Effect element."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, effect_type=None, extensiontype_=None):
@@ -2222,7 +2223,7 @@ class DataReadEffectType(DefinedEffectType):
     """The DataReadEffectType type is intended to characterize the effects
     of actions upon objects where some data is read, such as from a
     file or a pipe."""
-
+    
     subclass = None
     superclass = DefinedEffectType
     def __init__(self, effect_type=None, Data=None):
@@ -2290,7 +2291,7 @@ class DataWrittenEffectType(DefinedEffectType):
     """The DataWrittenEffectType type is intended to characterize the
     effects of actions upon objects where some data is written, such
     as to a file or a pipe."""
-
+    
     subclass = None
     superclass = DefinedEffectType
     def __init__(self, effect_type=None, Data=None):
@@ -2358,7 +2359,7 @@ class DataSentEffectType(DefinedEffectType):
     """The DataSentEffectType type is intended to characterize the effects
     of actions upon objects where some data is sent, such as a byte
     sequence on a socket."""
-
+    
     subclass = None
     superclass = DefinedEffectType
     def __init__(self, effect_type=None, Data=None):
@@ -2426,7 +2427,7 @@ class DataReceivedEffectType(DefinedEffectType):
     """The DataReceivedEffectType type is intended to characterize the
     effects of actions upon objects where some data is received,
     such as a byte sequence on a socket."""
-
+    
     subclass = None
     superclass = DefinedEffectType
     def __init__(self, effect_type=None, Data=None):
@@ -2574,7 +2575,7 @@ class PropertiesEnumeratedEffectType(DefinedEffectType):
     the effects of actions upon objects where some properties of the
     object are enumerated, such as the startup parameters for a
     process."""
-
+    
     subclass = None
     superclass = DefinedEffectType
     def __init__(self, effect_type=None, Properties=None):
@@ -2641,7 +2642,7 @@ class PropertiesEnumeratedEffectType(DefinedEffectType):
 class PropertiesType(GeneratedsSuper):
     """The PropertiesType specifies the properties that were enumerated as
     a result of the action on the object."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Property=None):
@@ -2710,7 +2711,7 @@ class ValuesEnumeratedEffectType(DefinedEffectType):
     """The ValuesEnumeratedEffectType type is intended to characterize the
     effects of actions upon objects where some values of the object
     are enumerated, such as the values of a registry key."""
-
+    
     subclass = None
     superclass = DefinedEffectType
     def __init__(self, effect_type=None, Values=None):
@@ -2777,7 +2778,7 @@ class ValuesEnumeratedEffectType(DefinedEffectType):
 class ValuesType(GeneratedsSuper):
     """The ValuesType specifies the values that were enumerated as a result
     of the action on the object."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Value=None):
@@ -2849,7 +2850,7 @@ class SendControlCodeEffectType(DefinedEffectType):
     other control-oriented communication signal, is sent to the
     object. For example, an action may send a control code to change
     the running state of a process."""
-
+    
     subclass = None
     superclass = DefinedEffectType
     def __init__(self, effect_type=None, Control_Code=None):
@@ -3097,7 +3098,7 @@ class EventPoolType(GeneratedsSuper):
     the pooled Event elements. This reduces redundancy caused when
     identical Events occur multiple times within a set of defined
     Observables."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Event=None):
@@ -3169,7 +3170,7 @@ class ActionPoolType(GeneratedsSuper):
     the pooled Action elements. This reduces redundancy caused when
     identical Actions occur multiple times within a set of defined
     Observables."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Action=None):
@@ -3241,7 +3242,7 @@ class ObjectPoolType(GeneratedsSuper):
     the pooled Object elements. This reduces redundancy caused when
     identical Objects occur multiple times within a set of defined
     Observables."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Object=None):
@@ -3313,7 +3314,7 @@ class PropertyPoolType(GeneratedsSuper):
     the pooled Properties elements. This reduces redundancy caused
     when identical Properties occur multiple times within a set of
     defined Observables."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Property=None):
@@ -3382,7 +3383,7 @@ class ObfuscationTechniquesType(GeneratedsSuper):
     """The ObfuscationTechniquesType enables the description of a set of
     potential techniques an attacker could leverage to obfuscate the
     observability of this Observable."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Obfuscation_Technique=None):
@@ -3521,7 +3522,7 @@ class ObfuscationTechniqueType(GeneratedsSuper):
 # end class ObfuscationTechniqueType
 
 class KeywordsType(GeneratedsSuper):
-
+    
     subclass = None
     superclass = None
     def __init__(self, Keyword=None):
@@ -3588,7 +3589,7 @@ class KeywordsType(GeneratedsSuper):
 # end class KeywordsType
 
 class PatternFidelityType(GeneratedsSuper):
-
+    
     subclass = None
     superclass = None
     def __init__(self, Noisiness=None, Ease_of_Evasion=None, Evasion_Techniques=None):
@@ -3678,7 +3679,7 @@ class AssociatedObjectType(ObjectType):
     """The AssociatedObjectType is a complex type representing the
     characterization of a cyber observable Object associated with a
     given cyber observable Action."""
-
+    
     subclass = None
     superclass = ObjectType
     def __init__(self, has_changed=None, idref=None, id=None, State=None, Description=None, Properties=None, Domain_Specific_Object_Properties=None, Location=None, Related_Objects=None, Defined_Effect=None, Discovery_Method=None, Association_Type=None, Action_Pertinent_Object_Properties=None):
@@ -3938,7 +3939,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

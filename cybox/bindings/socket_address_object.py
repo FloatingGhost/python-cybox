@@ -3,8 +3,9 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import address_object
 from . import hostname_object
 from . import port_object
@@ -13,7 +14,7 @@ from . import port_object
 class SocketAddressObjectType(cybox_common.ObjectPropertiesType):
     """The SocketAddressObjectType specifies an IP address/port number
     pair."""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, IP_Address=None, Hostname=None, Port=None):
@@ -248,7 +249,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

@@ -3,8 +3,9 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import semaphore_object
 from . import win_handle_object
 
@@ -12,7 +13,7 @@ from . import win_handle_object
 class WindowsSemaphoreObjectType(semaphore_object.SemaphoreObjectType):
     """The WindowsSemaphoreObjectType is intended to characterize Windows
     semaphore (synchronization) objects."""
-
+    
     subclass = None
     superclass = semaphore_object.SemaphoreObjectType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, named=None, Current_Count=None, Maximum_Count=None, Name=None, Handle=None, Security_Attributes=None):
@@ -243,7 +244,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

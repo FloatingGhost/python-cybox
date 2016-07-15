@@ -5,10 +5,7 @@ from datetime import datetime
 
 import dateutil.parser
 
-from mixbox import entities
-from mixbox.vendor import six
-
-from cybox.compat import long
+import cybox
 import cybox.bindings.cybox_common as common_binding
 from cybox.common import PatternFieldGroup
 from cybox.utils import normalize_to_xml, denormalize_from_xml
@@ -18,8 +15,7 @@ TIME_PRECISION_VALUES = ("hour", "minute", "second")
 DATETIME_PRECISION_VALUES = DATE_PRECISION_VALUES + TIME_PRECISION_VALUES
 
 
-@six.python_2_unicode_compatible
-class BaseProperty(PatternFieldGroup, entities.Entity):
+class BaseProperty(PatternFieldGroup, cybox.Entity):
     # Most Properties are defined in the "common" binding, so we'll just set
     # that here. Some BaseProperty subclasses might have to override this.
     _binding = common_binding
@@ -47,7 +43,11 @@ class BaseProperty(PatternFieldGroup, entities.Entity):
         self.observed_encoding = None
 
     def __str__(self):
-        return six.text_type(self.serialized_value)
+        # To be safe, return the unicode string encoded as UTF-8
+        return self.__unicode__().encode("utf-8")
+
+    def __unicode__(self):
+        return str(self.serialized_value)
 
     def __int__(self):
         return int(self.serialized_value)
@@ -180,10 +180,10 @@ class BaseProperty(PatternFieldGroup, entities.Entity):
             PatternFieldGroup.is_plain(self)
         )
 
-    def __nonzero__(self):
+    def __bool__(self):
         return (not self.is_plain()) or (self.value is not None)
 
-    __bool__ = __nonzero__
+    __bool__ = True
 
     def to_obj(self, return_obj=None, ns_info=None):
         self._collect_ns_info(ns_info)
@@ -345,7 +345,7 @@ class String(BaseProperty):
 
     @staticmethod
     def _parse_value(value):
-        if value is not None and not isinstance(value, six.string_types):
+        if value is not None and not isinstance(value, str):
             raise ValueError("Cannot set String type to non-string value")
 
         return value
@@ -358,7 +358,7 @@ class _IntegerBase(BaseProperty):
     def _parse_value(value):
         if value is None or value == '':
             return None
-        if isinstance(value, six.string_types):
+        if isinstance(value, str):
             return int(value, 0)
         else:
             return int(value)
@@ -510,10 +510,10 @@ class _LongBase(BaseProperty):
     def _parse_value(value):
         if value is None or value == '':
             return None
-        if isinstance(value, six.string_types):
-            return long(value, 0)
+        if isinstance(value, str):
+            return int(value, 0)
         else:
-            return long(value)
+            return int(value)
 
 
 class Long(_LongBase):

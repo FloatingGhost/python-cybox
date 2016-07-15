@@ -1,68 +1,53 @@
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-from mixbox import entities
-from mixbox import fields
-from mixbox.vendor import six
-from mixbox.vendor.six import u
-
+import cybox
 import cybox.bindings.cybox_common as common_binding
 from cybox.common import vocabs, HexBinary, String, VocabString
 from cybox.common.vocabs import HashName
 
 
-def _set_hash_type(entity, value):
-    """Callback hook to set the hash type based on the length of the value.
-
-    If the `Hash` object already has a type, it is not changed.
-
-    Args:
-        entity (Hash): The Hash object being modified.
-        value (str): The hash value
-    """
-    # If the Hash already has a defined type_, exit early:
-    if entity.type_:
-        return
-    if not value:
-        return
-    # The `value` argument should be a HexBinary object, so we look at the
-    # string in its `value` field.
-    hashlen = len(value.value)
-    if hashlen == 32:
-        entity.type_ = Hash.TYPE_MD5
-    elif hashlen == 40:
-        entity.type_ = Hash.TYPE_SHA1
-    elif hashlen == 56:
-        entity.type_ = Hash.TYPE_SHA224
-    elif hashlen == 64:
-        entity.type_ = Hash.TYPE_SHA256
-    elif hashlen == 96:
-        entity.type_ = Hash.TYPE_SHA384
-    elif hashlen == 128:
-        entity.type_ = Hash.TYPE_SHA512
-    else:
-        entity.type_ = Hash.TYPE_OTHER
-
-
-class Hash(entities.Entity):
+class Hash(cybox.Entity):
     _binding = common_binding
     _binding_class = common_binding.HashType
     _namespace = 'http://cybox.mitre.org/common-2'
 
-    type_ = vocabs.VocabField("Type", HashName)
-    simple_hash_value = fields.TypedField("Simple_Hash_Value", HexBinary,
-                                          postset_hook=_set_hash_type)
-    fuzzy_hash_value = fields.TypedField("Fuzzy_Hash_Value", String)
+    def _auto_type(self):
+        """Attempt to determine the hash type if `type_` is None"""
+        if self.simple_hash_value and not self.type_:
+            val = self.simple_hash_value.value
+            if not val:
+                # If not provided or an empty string, don't assign the type
+                self.type_ = None
+            elif len(val) == 32:
+                self.type_ = Hash.TYPE_MD5
+            elif len(val) == 40:
+                self.type_ = Hash.TYPE_SHA1
+            elif len(val) == 56:
+                self.type_ = Hash.TYPE_SHA224
+            elif len(val) == 64:
+                self.type_ = Hash.TYPE_SHA256
+            elif len(val) == 96:
+                self.type_ = Hash.TYPE_SHA384
+            elif len(val) == 128:
+                self.type_ = Hash.TYPE_SHA512
+            else:
+                self.type_ = Hash.TYPE_OTHER
 
-    TYPE_MD5 = u("MD5")
-    TYPE_MD6 = u("MD6")
-    TYPE_SHA1 = u("SHA1")
-    TYPE_SHA224 = u("SHA224")
-    TYPE_SHA256 = u("SHA256")
-    TYPE_SHA384 = u("SHA384")
-    TYPE_SHA512 = u("SHA512")
-    TYPE_SSDEEP = u("SSDEEP")
-    TYPE_OTHER = VocabString(u("Other"))
+    type_ = vocabs.VocabField("Type", HashName)
+    simple_hash_value = cybox.TypedField("Simple_Hash_Value", HexBinary,
+                                         callback_hook=_auto_type)
+    fuzzy_hash_value = cybox.TypedField("Fuzzy_Hash_Value", String)
+
+    TYPE_MD5 = "MD5"
+    TYPE_MD6 = "MD6"
+    TYPE_SHA1 = "SHA1"
+    TYPE_SHA224 = "SHA224"
+    TYPE_SHA256 = "SHA256"
+    TYPE_SHA384 = "SHA384"
+    TYPE_SHA512 = "SHA512"
+    TYPE_SSDEEP = "SSDEEP"
+    TYPE_OTHER = VocabString("Other")
 
     def __init__(self, hash_value=None, type_=None, exact=False):
         """Create a new Hash Object
@@ -134,7 +119,7 @@ class Hash(entities.Entity):
 #        return hash
 
 
-class HashList(entities.EntityList):
+class HashList(cybox.EntityList):
     _binding = common_binding
     _binding_class = common_binding.HashListType
     _binding_var = "Hash"
@@ -143,7 +128,7 @@ class HashList(entities.EntityList):
 
     def _fix_value(self, value):
         # If the user tries to put a string into a list, convert it to a Hash.
-        if isinstance(value, six.string_types):
+        if isinstance(value, str):
             return Hash(value)
 
     @property

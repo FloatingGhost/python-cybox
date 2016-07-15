@@ -6,10 +6,13 @@
 #importlib is imported below
 import os
 
-from mixbox.vendor import six
-
 from .caches import *
+from .idgen import *
 from .nsparser import *
+
+
+def get_class_for_object_type(object_type):
+    return META.get_class_for_object_type(object_type)
 
 
 def denormalize_from_xml(value, delimiter):
@@ -31,12 +34,12 @@ def normalize_to_xml(value, delimiter):
         raise ValueError("delimiter must not be None")
 
     if isinstance(value, list):
-        normalized_list = [six.text_type(x) for x in value]
+        normalized_list = [str(x) for x in value]
         if any(delimiter in x for x in normalized_list):
             raise ValueError("list items cannot contain delimiter")
         normalized = delimiter.join(normalized_list)
     else:
-        normalized = six.text_type(value)
+        normalized = str(value)
         if delimiter in normalized:
             raise ValueError("value cannot contain delimiter")
 
@@ -66,6 +69,14 @@ def _import_submodules(pkg):
             continue
         mod_name = "%s.%s" % (pkg.__name__, module[:-3])
         importlib.import_module(mod_name)
+
+
+def is_sequence(item):
+    """Returns ``True`` if `value` is a sequence type (e.g., ``list``, or
+    ``tuple``). String types will return ``False``.
+
+    """
+    return hasattr(item, "__iter__")
 
 
 def _import_all():

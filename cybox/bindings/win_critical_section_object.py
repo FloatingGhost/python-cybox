@@ -3,14 +3,14 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
 
 
 class WindowsCriticalSectionObjectType(cybox_common.ObjectPropertiesType):
     """The WindowsCriticalSectionObjectType type is intended to
     characterize Windows Critical Section objects."""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, Address=None, Spin_Count=None):
@@ -235,7 +235,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

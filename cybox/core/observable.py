@@ -1,16 +1,13 @@
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-from mixbox import entities
-from mixbox import idgen
-
-from cybox import Unicode
+import cybox
 import cybox.bindings.cybox_core as core_binding
 from cybox.common import MeasureSource, ObjectProperties, StructuredText
 from cybox.core import Object, Event
 
 
-class Observable(entities.Entity):
+class Observable(cybox.Entity):
     """A single Observable.
     """
     _binding = core_binding
@@ -31,7 +28,7 @@ class Observable(entities.Entity):
         """
         super(Observable, self).__init__()
         if not id_ and not idref:
-            id_ = idgen.create_id(prefix="Observable")
+            id_ = cybox.utils.create_id(prefix="Observable")
 
         self.id_ = id_
         self.title = title
@@ -257,7 +254,7 @@ class Observable(entities.Entity):
         return obs
 
 
-class Observables(entities.EntityList):
+class Observables(cybox.EntityList):
     """The root CybOX Observables object.
 
     Pools are not currently supported.
@@ -360,7 +357,7 @@ class Observables(entities.EntityList):
         return obs
 
 
-class ObservableComposition(entities.Entity):
+class ObservableComposition(cybox.Entity):
     '''The ObservableCompositionType entity defines a logical compositions of
     CybOX Observables. The combinatorial behavior is derived from the operator
     property.'''
@@ -441,9 +438,9 @@ class ObservableComposition(entities.Entity):
         return obs_comp
 
 
-class Keywords(entities.EntityList):
+class Keywords(cybox.EntityList):
     _binding = core_binding
     _binding_class = core_binding.KeywordsType
     _binding_var = "Keyword"
-    _contained_type = Unicode
+    _contained_type = cybox.Unicode
     _namespace = 'http://cybox.mitre.org/cybox-2'

@@ -1,12 +1,6 @@
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-import datetime
-
-from mixbox import entities
-from mixbox import fields
-from mixbox.dates import parse_datetime, serialize_datetime
-
 import cybox
 import cybox.bindings.cybox_core as core_binding
 from cybox.common import vocabs, VocabString, StructuredText, MeasureSource
@@ -16,7 +10,7 @@ from cybox.common.vocabs import ActionName, ActionType
 from cybox.common.vocabs import ActionArgumentName as ArgumentName
 
 
-class ActionAliases(entities.EntityList):
+class ActionAliases(cybox.EntityList):
     _binding = core_binding
     _binding_class = core_binding.ActionAliasesType
     _binding_var = "Action_Alias"
@@ -24,30 +18,30 @@ class ActionAliases(entities.EntityList):
     _namespace = 'http://cybox.mitre.org/cybox-2'
 
 
-class ActionArgument(entities.Entity):
+class ActionArgument(cybox.Entity):
     _binding = core_binding
     _binding_class = core_binding.ActionArgumentType
     _namespace = 'http://cybox.mitre.org/cybox-2'
 
     argument_name = vocabs.VocabField("Argument_Name", ArgumentName)
-    argument_value = fields.TypedField("Argument_Value")
+    argument_value = cybox.TypedField("Argument_Value")
 
 
-class ActionArguments(entities.EntityList):
+class ActionArguments(cybox.EntityList):
     _binding_class = core_binding.ActionArgumentsType
     _binding_var = "Action_Argument"
     _contained_type = ActionArgument
     _namespace = 'http://cybox.mitre.org/cybox-2'
 
 
-class AssociatedObjects(entities.EntityList):
+class AssociatedObjects(cybox.EntityList):
     _binding_class = core_binding.AssociatedObjectsType
     _binding_var = "Associated_Object"
     _contained_type = AssociatedObject
     _namespace = 'http://cybox.mitre.org/cybox-2'
 
 
-class ActionRelationship(entities.Entity):
+class ActionRelationship(cybox.Entity):
     _binding = core_binding
     _namespace = 'http://cybox.mitre.org/cybox-2'
 
@@ -93,51 +87,38 @@ class ActionRelationship(entities.Entity):
         return action_relationship_
 
 
-class ActionRelationships(entities.EntityList):
+class ActionRelationships(cybox.EntityList):
     _binding_class = core_binding.ActionRelationshipsType
     _binding_var = "Relationship"
     _contained_type = ActionRelationship
     _namespace = 'http://cybox.mitre.org/cybox-2'
 
 
-class Action(entities.Entity):
+class Action(cybox.Entity):
     _binding = core_binding
     _binding_class = core_binding.ActionType
     _namespace = 'http://cybox.mitre.org/cybox-2'
 
-    id_ = fields.TypedField("id")
-    idref = fields.TypedField("idref")
-    ordinal_position = fields.TypedField("ordinal_position")
-    action_status = fields.TypedField("action_status")
-    context = fields.TypedField("context")
-    timestamp = fields.TypedField("timestamp")
+    id_ = cybox.TypedField("id")
+    idref = cybox.TypedField("idref")
+    ordinal_position = cybox.TypedField("ordinal_position")
+    action_status = cybox.TypedField("action_status")
+    context = cybox.TypedField("context")
+    timestamp = cybox.TypedField("timestamp")
 
     type_ = vocabs.VocabField("Type", ActionType)
     name = vocabs.VocabField("Name", ActionName)
-    description = fields.TypedField("Description", StructuredText)
-    action_aliases = fields.TypedField("Action_Aliases", ActionAliases)
-    action_arguments = fields.TypedField("Action_Arguments", ActionArguments)
-    discovery_method = fields.TypedField("Discovery_Method", MeasureSource)
-    associated_objects = fields.TypedField("Associated_Objects",
+    description = cybox.TypedField("Description", StructuredText)
+    action_aliases = cybox.TypedField("Action_Aliases", ActionAliases)
+    action_arguments = cybox.TypedField("Action_Arguments", ActionArguments)
+    discovery_method = cybox.TypedField("Discovery_Method", MeasureSource)
+    associated_objects = cybox.TypedField("Associated_Objects",
             AssociatedObjects)
-    relationships = fields.TypedField("Relationships", ActionRelationships)
-    frequency = fields.TypedField("Frequency", Frequency)
-
-    def to_dict(self):
-        d = super(Action, self).to_dict()
-        # Don't add an empty timestamp if there isn't already one.
-        if 'timestamp' in d:
-            d['timestamp'] = serialize_datetime(d['timestamp'])
-        return d
-
-    @classmethod
-    def from_dict(cls, action_dict):
-        action = super(Action, cls).from_dict(action_dict)
-        action.timestamp = parse_datetime(action.timestamp)
-        return action
+    relationships = cybox.TypedField("Relationships", ActionRelationships)
+    frequency = cybox.TypedField("Frequency", Frequency)
 
 
-class Actions(entities.EntityList):
+class Actions(cybox.EntityList):
     _binding_class = core_binding.ActionsType
     _binding_var = "Action"
     _contained_type = Action

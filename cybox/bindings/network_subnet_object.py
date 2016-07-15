@@ -3,15 +3,16 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import address_object
 from . import network_route_entry_object
 
 
 class RoutesType(GeneratedsSuper):
     """The RoutesType is intended to characterize a set network routes."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Route=None):
@@ -79,7 +80,7 @@ class RoutesType(GeneratedsSuper):
 class NetworkSubnetObjectType(cybox_common.ObjectPropertiesType):
     """The NetworkSubnetObjectType type is intended to characterize a
     generic system network subnet."""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, Name=None, Description=None, Number_Of_IP_Addresses=None, Routes=None):
@@ -339,7 +340,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

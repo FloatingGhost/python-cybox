@@ -3,15 +3,16 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import network_route_entry_object
 
 
 class UnixNetworkRouteEntryObjectType(network_route_entry_object.NetworkRouteEntryObjectType):
     """The UnixNetworkRouteEntryObjectType type is intended to characterize
     entries in the network routing table of a Unix system."""
-
+    
     subclass = None
     superclass = network_route_entry_object.NetworkRouteEntryObjectType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, is_publish=None, is_autoconfigure_address=None, is_loopback=None, is_immortal=None, is_ipv6=None, Destination_Address=None, Origin=None, Netmask=None, Gateway_Address=None, Metric=None, Type=None, Protocol=None, Interface=None, Preferred_Lifetime=None, Valid_Lifetime=None, Route_Age=None, Flags=None, MSS=None, Ref=None, Use=None, Window=None):
@@ -282,7 +283,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

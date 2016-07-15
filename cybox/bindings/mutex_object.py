@@ -3,7 +3,7 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
 
 
@@ -11,7 +11,7 @@ class MutexObjectType(cybox_common.ObjectPropertiesType):
     """The MutexObjectType type is intended to characterize generic mutual
     exclusion (mutex) objects.The named field specifies whether the
     Mutex is named."""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, named=None, Name=None):
@@ -237,7 +237,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

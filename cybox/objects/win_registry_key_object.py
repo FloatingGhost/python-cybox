@@ -1,9 +1,7 @@
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-from mixbox import entities
-from mixbox import fields
-
+import cybox
 import cybox.bindings.win_registry_key_object as win_registry_key_binding
 
 from cybox.common import (ByteRuns, DateTime, ObjectProperties, String,
@@ -11,18 +9,18 @@ from cybox.common import (ByteRuns, DateTime, ObjectProperties, String,
 from cybox.objects.win_handle_object import WinHandleList
 
 
-class RegistryValue(entities.Entity):
+class RegistryValue(cybox.Entity):
     _binding = win_registry_key_binding
     _binding_class = win_registry_key_binding.RegistryValueType
     _namespace = "http://cybox.mitre.org/objects#WinRegistryKeyObject-2"
 
-    name = fields.TypedField("Name", String)
-    data = fields.TypedField("Data", String)
-    datatype = fields.TypedField("Datatype", String)
-    byte_runs = fields.TypedField("Byte_Runs", ByteRuns)
+    name = cybox.TypedField("Name", String)
+    data = cybox.TypedField("Data", String)
+    datatype = cybox.TypedField("Datatype", String)
+    byte_runs = cybox.TypedField("Byte_Runs", ByteRuns)
 
 
-class RegistryValues(entities.EntityList):
+class RegistryValues(cybox.EntityList):
     _binding = win_registry_key_binding
     _binding_class = win_registry_key_binding.RegistryValuesType
     _binding_var = "Value"
@@ -30,7 +28,7 @@ class RegistryValues(entities.EntityList):
     _namespace = "http://cybox.mitre.org/objects#WinRegistryKeyObject-2"
 
 
-class RegistrySubkeys(entities.EntityList):
+class RegistrySubkeys(cybox.EntityList):
     _binding = win_registry_key_binding
     _binding_class = win_registry_key_binding.RegistrySubkeysType
     _binding_var = "Subkey"
@@ -45,15 +43,16 @@ class WinRegistryKey(ObjectProperties):
     _XSI_NS = "WinRegistryKeyObj"
     _XSI_TYPE = "WindowsRegistryKeyObjectType"
 
-    key = fields.TypedField("Key", String)
-    hive = fields.TypedField("Hive", String)
-    number_values = fields.TypedField("Number_Values", UnsignedInteger)
-    values = fields.TypedField("Values", RegistryValues)
-    modified_time = fields.TypedField("Modified_Time", DateTime)
-    creator_username = fields.TypedField("Creator_Username", String)
-    handle_list = fields.TypedField("Handle_List", WinHandleList)
-    number_subkeys = fields.TypedField("Number_Subkeys", UnsignedInteger)
-    subkeys = fields.TypedField("Subkeys", RegistrySubkeys)
-    byte_runs = fields.TypedField("Byte_Runs", ByteRuns)
+    key = cybox.TypedField("Key", String)
+    hive = cybox.TypedField("Hive", String)
+    number_values = cybox.TypedField("Number_Values", UnsignedInteger)
+    values = cybox.TypedField("Values", RegistryValues)
+    modified_time = cybox.TypedField("Modified_Time", DateTime)
+    creator_username = cybox.TypedField("Creator_Username", String)
+    handle_list = cybox.TypedField("Handle_List", WinHandleList)
+    number_subkeys = cybox.TypedField("Number_Subkeys", UnsignedInteger)
+    subkeys = cybox.TypedField("Subkeys", RegistrySubkeys)
+    byte_runs = cybox.TypedField("Byte_Runs", ByteRuns)
+
 
 RegistrySubkeys._contained_type = WinRegistryKey

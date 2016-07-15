@@ -1,15 +1,12 @@
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-from mixbox import entities
-from mixbox import fields
-
+import cybox
 import cybox.bindings.disk_object as disk_binding
 from cybox.objects.disk_partition_object import DiskPartition
 from cybox.common import ObjectProperties, String, UnsignedLong
 
-
-class PartitionList(entities.EntityList):
+class PartitionList(cybox.EntityList):
     _binding = disk_binding
     _binding_class = disk_binding.PartitionListType
     _binding_var = "Partition"
@@ -24,8 +21,8 @@ class Disk(ObjectProperties):
     _XSI_NS = "DiskObj"
     _XSI_TYPE = "DiskObjectType"
 
-    disk_name = fields.TypedField('Disk_Name', String)
-    disk_size = fields.TypedField('Disk_Size', UnsignedLong)
-    free_space = fields.TypedField('Free_Space', UnsignedLong)
-    partition_list = fields.TypedField('Partition_List', PartitionList)
-    type_ = fields.TypedField('Type', String)
+    disk_name = cybox.TypedField('Disk_Name', String)
+    disk_size = cybox.TypedField('Disk_Size', UnsignedLong)
+    free_space = cybox.TypedField('Free_Space', UnsignedLong)
+    partition_list = cybox.TypedField('Partition_List', PartitionList)
+    type_ = cybox.TypedField('Type', String)

@@ -3,14 +3,14 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
 
 
 class DeviceObjectType(cybox_common.ObjectPropertiesType):
     """The DeviceObjectType type is intended to characterize a specific
     Device."""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, Description=None, Device_Type=None, Manufacturer=None, Model=None, Serial_Number=None, Firmware_Version=None, System_Details=None):
@@ -299,7 +299,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

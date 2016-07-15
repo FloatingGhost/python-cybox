@@ -2,9 +2,7 @@
 # See LICENSE.txt for complete terms.
 
 import sys
-
-from mixbox.binding_utils import *
-
+from cybox.bindings import *
 import cybox.bindings.cybox_common as cybox_common
 
 XML_NS = "http://cybox.mitre.org/extensions/Address#CIQAddress3.0-1"
@@ -249,7 +247,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

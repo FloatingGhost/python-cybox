@@ -3,8 +3,9 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import address_object
 from . import network_packet_object
 from . import socket_address_object
@@ -13,7 +14,7 @@ from . import socket_address_object
 class NetworkLayerInfoType(GeneratedsSuper):
     """Network layer information (relative to the OSI network model) which
     is typically captured in all types of network flow records."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Src_Socket_Address=None, Dest_Socket_Address=None, IP_Protocol=None, extensiontype_=None):
@@ -116,7 +117,7 @@ class NetworkFlowLabelType(NetworkLayerInfoType):
     include it for organizational purposes. Because these fields are
     defined here, they are excluded from the fields associated
     directly with each different flow record format type."""
-
+    
     subclass = None
     superclass = NetworkLayerInfoType
     def __init__(self, Src_Socket_Address=None, Dest_Socket_Address=None, IP_Protocol=None, Ingress_Interface_Index=None, Egress_Interface_Index=None, IP_Type_Of_Service=None):
@@ -208,7 +209,7 @@ class NetworkFlowLabelType(NetworkLayerInfoType):
 
 class UnidirectionalRecordType(GeneratedsSuper):
     """Netflow record formats that capture traffic in one direction."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, IPFIX_Message=None, NetflowV9_Export_Packet=None, NetflowV5_Packet=None, SiLK_Record=None):
@@ -304,7 +305,7 @@ class BidirectionalRecordType(GeneratedsSuper):
     supports bidirectional flows, and as such, is usually used as an
     alternative to NetFlow v5 analysis via SiLK
     (http://www.qosient.com/argus/)."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, YAF_Record=None):
@@ -367,7 +368,7 @@ class BidirectionalRecordType(GeneratedsSuper):
 class IPFIXMessageType(GeneratedsSuper):
     """The IPFIX protocol provides IP flow information.
     http://tools.ietf.org/html/rfc5101"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Message_Header=None, Set=None):
@@ -448,7 +449,7 @@ class IPFIXMessageHeaderType(GeneratedsSuper):
     5101 (http://tools.ietf.org/html/rfc5101) under the heading,
     "Message Header Field Descriptions." Note that common elements
     are included in the Network_Flow_Label."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Version=None, Byte_Length=None, Export_Timestamp=None, Sequence_Number=None, Observation_Domain_ID=None):
@@ -559,7 +560,7 @@ class IPFIXSetType(GeneratedsSuper):
     an IPFIX message. See RFC 5101 and look for the terms "Template
     Set", "Options Template Set", and "Data Set", for more
     information."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Template_Set=None, Options_Template_Set=None, Data_Set=None):
@@ -644,7 +645,7 @@ class IPFIXTemplateSetType(GeneratedsSuper):
     the Set Header, the collection of Template Records, and the
     optional padding at the end of the Template Set. See RFC 5101
     under Set Format, which is section 3.3.1, for more information."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Set_Header=None, Template_Record=None, Padding=None):
@@ -738,7 +739,7 @@ class IPFIXOptionsTemplateSetType(GeneratedsSuper):
     Records, and the optional padding at the end of the Options
     Template Set. See RFC 5101 under Set Format, which is section
     3.3.1, for more information."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Set_Header=None, Options_Template_Record=None, Padding=None):
@@ -831,7 +832,7 @@ class IPFIXDataSetType(GeneratedsSuper):
     Set Header, the collection of Data Records, and the optional
     padding at the end of the Data Set. See RFC 5101 under Set
     Format, which is section 3.3.1, for more information."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Set_Header=None, Data_Record=None, Padding=None):
@@ -921,7 +922,7 @@ class IPFIXDataSetType(GeneratedsSuper):
 
 class IPFIXSetHeaderType(GeneratedsSuper):
     """Defines the elements of the IPFIX set header."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Set_ID=None, Length=None):
@@ -999,7 +1000,7 @@ class IPFIXTemplateRecordType(GeneratedsSuper):
     the Template Record Header, and the Field Specifiers. See RFC
     5101 under Template Record Format, section 3.4.1, for more
     information."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Template_Record_Header=None, Field_Specifier=None):
@@ -1077,7 +1078,7 @@ class IPFIXTemplateRecordType(GeneratedsSuper):
 class IPFIXTemplateRecordHeaderType(GeneratedsSuper):
     """Specifies the fields in a Template Record Header, Template_ID and
     Field_Count, as explained in RFC 5101, section 3.4.1."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Template_ID=None, Field_Count=None):
@@ -1156,7 +1157,7 @@ class IPFIXTemplateRecordHeaderType(GeneratedsSuper):
 class IPFIXTemplateRecordFieldSpecifiersType(GeneratedsSuper):
     """Specifies the fields in a Template Record Field Specifier, as
     explained in RFC 5101, section 3.2."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Enterprise_Bit=None, Information_Element_ID=None, Field_Length=None, Enterprise_Number=None):
@@ -1261,7 +1262,7 @@ class IPFIXOptionsTemplateRecordType(GeneratedsSuper):
     are two: the Options Template Record Header, and the Field
     Specifiers. See RFC 5101 under Options Template Record Format,
     section 3.4.2.2, for more information."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Options_Template_Record_Header=None, Field_Specifier=None):
@@ -1338,7 +1339,7 @@ class IPFIXOptionsTemplateRecordType(GeneratedsSuper):
 
 class IPFIXOptionsTemplateRecordHeaderType(GeneratedsSuper):
     """Defines the ehader of an options template record."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Template_ID=None, Field_Count=None, Scope_Field_Count=None):
@@ -1432,7 +1433,7 @@ class IPFIXOptionsTemplateRecordFieldSpecifiersType(GeneratedsSuper):
     as explained in RFC 5101, sections 3.2 and 3.4.2.2. It consists
     of two sequences: Scope Fields and Option Fields, appended
     together."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Scope_Enterprise_Bit=None, Scope_Information_Element_ID=None, Scope_Field_Length=None, Scope_Enterprise_Number=None, Option_Enterprise_Bit=None, Option_Information_Element_ID=None, Option_Field_Length=None, Option_Enterprise_Number=None):
@@ -1585,7 +1586,7 @@ class IPFIXOptionsTemplateRecordFieldSpecifiersType(GeneratedsSuper):
 class IPFIXDataRecordType(GeneratedsSuper):
     """Data records are sent in data sets. A data record consists of only
     one more more Field values."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Field_Value=None):
@@ -1656,7 +1657,7 @@ class IPFIXDataRecordType(GeneratedsSuper):
 class NetflowV9ExportPacketType(GeneratedsSuper):
     """Netflow v9 was developed by Cisco and provides acess to IP flow
     information. http://www.ietf.org/rfc/rfc3954.txt"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Packet_Header=None, Flow_Set=None):
@@ -1735,7 +1736,7 @@ class NetflowV9PacketHeaderType(GeneratedsSuper):
     """Header fields defined for Netflow v9. Note that common elements are
     included in the Network_Flow_Label.
     http://www.ietf.org/rfc/rfc3954.txt"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Version=None, Record_Count=None, Sys_Up_Time=None, Unix_Secs=None, Sequence_Number=None, Source_ID=None):
@@ -1856,7 +1857,7 @@ class NetflowV9FlowSetType(GeneratedsSuper):
     There are three differnet types of FlowSets, as defined in RFC
     3954: a Template FlowSet, Options Template FlowSet and Data
     FlowSet."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Template_Flow_Set=None, Options_Template_Flow_Set=None, Data_Flow_Set=None):
@@ -1938,7 +1939,7 @@ class NetflowV9FlowSetType(GeneratedsSuper):
 
 class NetflowV9TemplateFlowSetType(GeneratedsSuper):
     """Provides the format of the Template FlowSet."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Flow_Set_ID=None, Length=None, Template_Record=None):
@@ -2033,7 +2034,7 @@ class NetflowV9TemplateRecordType(GeneratedsSuper):
     """Specifies the Template Record region, which includes the template
     ID, field count, field type, and field length.Number of fields
     corresponds to Count field."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Template_ID=None, Field_Count=None, Field_Type=None, Field_Length=None):
@@ -2136,7 +2137,7 @@ class NetflowV9OptionsTemplateFlowSetType(GeneratedsSuper):
     """Specifies an Options Template FlowSet, which is one or more Options
     Template Records that have been grouped together in an Export
     Packet."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Flow_Set_ID=None, Length=None, Options_Template_Record=None, Padding=None):
@@ -2241,7 +2242,7 @@ class NetflowV9OptionsTemplateRecordType(GeneratedsSuper):
     """Specifies the Options Template Record region, which includes the
     Option Scope Length, Option Length, and fields specifying the
     Scope field type and Scope field length."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Template_ID=None, Option_Scope_Length=None, Option_Length=None, Scope_Field_Type=None, Scope_Field_Length=None, Option_Field_Type=None, Option_Field_Length=None):
@@ -2379,7 +2380,7 @@ class NetflowV9DataFlowSetType(GeneratedsSuper):
     is either a Flow Data Record or an Options Data Record
     previously defined by a Template Record or an Options Template
     Record. http://www.ietf.org/rfc/rfc3954.txt"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Flow_Set_ID_Template_ID=None, Length=None, Data_Record=None, Padding=None):
@@ -2486,7 +2487,7 @@ class NetflowV9DataRecordType(GeneratedsSuper):
     Flow Data Record or an Options Data Record previously defined by
     a Template Record or an Options Template Record.
     http://www.ietf.org/rfc/rfc3954.txt"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Flow_Data_Record=None, Options_Data_Record=None):
@@ -2569,7 +2570,7 @@ class NetflowV9DataRecordType(GeneratedsSuper):
 class FlowDataRecordType(GeneratedsSuper):
     """A Flow Data Record is a data record that contains values of the Flow
     parameters corresponding to a Template Record."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Flow_Record_Collection_Element=None):
@@ -2637,7 +2638,7 @@ class FlowDataRecordType(GeneratedsSuper):
 class FlowCollectionElementType(GeneratedsSuper):
     """Field values are associated with each record in the collection of a
     flow data record."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Flow_Record_Field_Value=None):
@@ -2709,7 +2710,7 @@ class OptionsDataRecordType(GeneratedsSuper):
     """The data record that contains values and scope information of the
     Flow measurement parameters, corresponding to an Options
     Template Record."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Scope_Field_Value=None, Option_Record_Collection_Element=None):
@@ -2790,7 +2791,7 @@ class OptionsDataRecordType(GeneratedsSuper):
 class OptionCollectionElementType(GeneratedsSuper):
     """Field values are associatedwith each option in the collection of an
     option data record."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Option_Record_Field_Value=None):
@@ -2863,7 +2864,7 @@ class NetflowV5PacketType(GeneratedsSuper):
     is still the most commonly used network flow format. Netflow v5
     was developed by Cisco.
     http://netflow.caligare.com/netflow_v5.htm"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Flow_Header=None, Flow_Record=None):
@@ -2941,7 +2942,7 @@ class NetflowV5PacketType(GeneratedsSuper):
 class NetflowV5FlowHeaderType(GeneratedsSuper):
     """Defines elements of a netflow v5 header.
     http://netflow.caligare.com/netflow_v5.htm"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Version=None, Count=None, Sys_Up_Time=None, Unix_Secs=None, Unix_Nsecs=None, Flow_Sequence=None, Engine_Type=None, Engine_ID=None, Sampling_Interval=None):
@@ -3098,7 +3099,7 @@ class NetflowV5FlowRecordType(GeneratedsSuper):
     elements that define the flow itself (e.g., source IP address)
     are provided in NetworkFlowLabelType. https://bto.bluecoat.com/p
     acketguide/8.6/info/netflow5-records.htm"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Nexthop_IPv4_Addr=None, Packet_Count=None, Byte_Count=None, SysUpTime_Start=None, SysUpTime_End=None, Padding1=None, TCP_Flags=None, Src_Autonomous_System=None, Dest_Autonomous_System=None, Src_IP_Mask_Bit_Count=None, Dest_IP_Mask_Bit_Count=None, Padding2=None):
@@ -3285,7 +3286,7 @@ class SiLKRecordType(GeneratedsSuper):
     source IP, SNMP ingress, etc.). For additional references, see
     http://tools.netsa.cert.org/silk/analysis-handbook.pdf,
     http://tools.netsa.cert.org/silk/faq.html#ipfix-fields."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Packet_Count=None, Byte_Count=None, TCP_Flags=None, Start_Time=None, Duration=None, End_Time=None, Sensor_Info=None, ICMP_Type=None, ICMP_Code=None, Router_Next_Hop_IP=None, Initial_TCP_Flags=None, Session_TCP_Flags=None, Flow_Attributes=None, Flow_Application=None, Src_IP_Type=None, Dest_IP_Type=None, Src_Country_Code=None, Dest_Country_Code=None, Src_MAPNAME=None, Dest_MAPNAME=None):
@@ -3558,7 +3559,7 @@ class SiLKRecordType(GeneratedsSuper):
 
 class SiLKSensorInfoType(GeneratedsSuper):
     """Defines elements associated with a SiLK sensor."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Sensor_ID=None, Class=None, Type=None):
@@ -3654,7 +3655,7 @@ class YAFRecordType(GeneratedsSuper):
     into bidirectional flows, then exports those flows to IPFIX.
     (REF:
     http://www.usenix.org/event/lisa10/tech/full_papers/Inacio.pdf)"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Flow=None, Reverse_Flow=None):
@@ -3729,7 +3730,7 @@ class YAFFlowType(GeneratedsSuper):
     to the forward portion of the flow. Elements common to all
     network flow objects are defined in the NetworkFlowLabelType
     (src ip address, ingress/egress interface)."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Flow_Start_Milliseconds=None, Flow_End_Milliseconds=None, Octet_Total_Count=None, Packet_Total_Count=None, Flow_End_Reason=None, SiLK_App_Label=None, Payload_Entropy=None, ML_App_Label=None, TCP_Flow=None, Vlan_ID_MAC_Addr=None, Passive_OS_Fingerprinting=None, First_Packet_Banner=None, Second_Packet_Banner=None, N_Bytes_Payload=None):
@@ -3928,7 +3929,7 @@ class YAFFlowType(GeneratedsSuper):
 class YAFReverseFlowType(GeneratedsSuper):
     """These elements correspond to the reverse flow captured by in YAF
     record."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Reverse_Octet_Total_Count=None, Reverse_Packet_Total_Count=None, Reverse_Payload_Entropy=None, Reverse_Flow_Delta_Milliseconds=None, TCP_Reverse_Flow=None, Reverse_Vlan_ID_MAC_Addr=None, Reverse_Passive_OS_Fingerprinting=None, Reverse_First_Packet=None, Reverse_N_Bytes_Payload=None):
@@ -4076,7 +4077,7 @@ class YAFReverseFlowType(GeneratedsSuper):
 
 class YAFTCPFlowType(GeneratedsSuper):
     """Contains TCP-related information of the network flow."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, TCP_Sequence_Number=None, Initial_TCP_Flags=None, Union_TCP_Flags=None):
@@ -4169,7 +4170,7 @@ class SiLKSensorClassType(cybox_common.BaseObjectPropertyType):
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -4242,7 +4243,7 @@ class SiLKDirectionType(cybox_common.BaseObjectPropertyType):
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -4316,7 +4317,7 @@ class SiLKCountryCodeType(cybox_common.BaseObjectPropertyType):
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -4389,7 +4390,7 @@ class SiLKAddressType(cybox_common.BaseObjectPropertyType):
     complex (i.e. regular-expression based) specifications.This
     attribute is optional and specifies the expected type for the
     value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -4462,7 +4463,7 @@ class SiLKFlowAttributesType(cybox_common.BaseObjectPropertyType):
     for permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -4536,7 +4537,7 @@ class NetflowV9ScopeFieldType(cybox_common.BaseObjectPropertyType):
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -4610,7 +4611,7 @@ class NetflowV9FieldType(cybox_common.BaseObjectPropertyType):
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -4682,7 +4683,7 @@ class NetworkFlowObjectType(cybox_common.ObjectPropertiesType):
     payload data (i.e. the actual data that was uploaded/downloaded
     to and from the Dest IP to Source IP as included in packet
     monitoring tools, such as Wireshark)."""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, Network_Flow_Label=None, Unidirectional_Flow_Record=None, Bidirectional_Flow_Record=None):
@@ -5155,7 +5156,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

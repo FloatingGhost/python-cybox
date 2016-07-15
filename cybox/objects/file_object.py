@@ -1,9 +1,7 @@
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-from mixbox import entities
-from mixbox import fields
-
+import cybox
 import cybox.bindings.file_object as file_binding
 from cybox.common import (ByteRuns, DateTime, DigitalSignatureList, Double,
         ExtractedFeatures, HashList, HexBinary, ObjectProperties, String,
@@ -56,48 +54,44 @@ class FilePath(String):
             filepath.fully_qualified = filepath_dict.get('fully_qualified')
         return filepath
 
-
-class EPJumpCode(entities.Entity):
+class EPJumpCode(cybox.Entity):
     _binding = file_binding
     _binding_class = file_binding.EPJumpCodeType
     _namespace = 'http://cybox.mitre.org/objects#FileObject-2'
 
-    depth = fields.TypedField("Depth", Integer)
-    opcodes = fields.TypedField("Opcodes", String)
-
-
-class EntryPointSignature(entities.Entity):
+    depth = cybox.TypedField("Depth", Integer)
+    opcodes = cybox.TypedField("Opcodes", String)
+    
+class EntryPointSignature(cybox.Entity):
     _binding = file_binding
     _binding_class = file_binding.EntryPointSignatureType
     _namespace = 'http://cybox.mitre.org/objects#FileObject-2'
-
-    name = fields.TypedField("Name", String)
-    type_ = fields.TypedField("Type")
-
-
-class EntryPointSignatureList(entities.EntityList):
+    
+    name = cybox.TypedField("Name", String)
+    type_ = cybox.TypedField("Type", String)
+    
+class EntryPointSignatureList(cybox.EntityList):
     _binding = file_binding
     _binding_class = file_binding.EntryPointSignatureListType
     _binding_var = "Entry_Point_Signature"
     _contained_type = EntryPointSignature
     _namespace = 'http://cybox.mitre.org/objects#FileObject-2'
 
-
-class Packer(entities.Entity):
+class Packer(cybox.Entity):
     _binding = file_binding
     _binding_class = file_binding.PackerType
     _namespace = 'http://cybox.mitre.org/objects#FileObject-2'
 
-    name = fields.TypedField("Name", String)
-    version = fields.TypedField("Version", String)
-    entry_point = fields.TypedField("Entry_Point", HexBinary)
-    signature = fields.TypedField("Signature", String)
-    type_ = fields.TypedField("Type", String)
-    detected_entrypoint_signatures = fields.TypedField("Detected_Entrypoint_Signatures", EntryPointSignatureList)
-    ep_jump_codes = fields.TypedField("EP_Jump_Codes", EPJumpCode)
+    name = cybox.TypedField("Name", String)
+    version = cybox.TypedField("Version", String)
+    entry_point = cybox.TypedField("Entry_Point", HexBinary)
+    signature = cybox.TypedField("Signature", String)
+    type_ = cybox.TypedField("Type", String)
+    detected_entrypoint_signatures = cybox.TypedField("Detected_Entrypoint_Signatures", EntryPointSignatureList)
+    ep_jump_codes = cybox.TypedField("EP_Jump_Codes", EPJumpCode)
 
 
-class PackerList(entities.EntityList):
+class PackerList(cybox.EntityList):
     _binding = file_binding
     _binding_class = file_binding.PackerListType
     _binding_var = "Packer"
@@ -105,7 +99,7 @@ class PackerList(entities.EntityList):
     _namespace = 'http://cybox.mitre.org/objects#FileObject-2'
 
 
-class SymLinksList(entities.EntityList):
+class SymLinksList(cybox.EntityList):
     _binding = file_binding
     _binding_class = file_binding.SymLinksListType
     _binding_var = "Sym_Link"
@@ -113,11 +107,11 @@ class SymLinksList(entities.EntityList):
     _namespace = 'http://cybox.mitre.org/objects#FileObject-2'
 
 
-class FileAttribute(entities.Entity):
+class FileAttribute(cybox.Entity):
     """An abstract class for file attributes."""
 
 
-class FilePermissions(entities.Entity):
+class FilePermissions(cybox.Entity):
     """An abstract class for file permissions."""
 
 
@@ -128,39 +122,39 @@ class File(ObjectProperties):
     _XSI_NS = "FileObj"
     _XSI_TYPE = "FileObjectType"
 
-    is_packed = fields.TypedField("is_packed")
-    is_masqueraded = fields.TypedField("is_masqueraded")
-    file_name = fields.TypedField("File_Name", String)
-    file_path = fields.TypedField("File_Path", FilePath)
-    device_path = fields.TypedField("Device_Path", String)
-    full_path = fields.TypedField("Full_Path", String)
-    file_extension = fields.TypedField("File_Extension", String)
-    size_in_bytes = fields.TypedField("Size_In_Bytes", UnsignedLong)
-    magic_number = fields.TypedField("Magic_Number", HexBinary)
-    file_format = fields.TypedField("File_Format", String)
-    hashes = fields.TypedField("Hashes", HashList)
-    digital_signatures = fields.TypedField("Digital_Signatures",
+    is_packed = cybox.TypedField("is_packed")
+    is_masqueraded = cybox.TypedField("is_masqueraded")
+    file_name = cybox.TypedField("File_Name", String)
+    file_path = cybox.TypedField("File_Path", FilePath)
+    device_path = cybox.TypedField("Device_Path", String)
+    full_path = cybox.TypedField("Full_Path", String)
+    file_extension = cybox.TypedField("File_Extension", String)
+    size_in_bytes = cybox.TypedField("Size_In_Bytes", UnsignedLong)
+    magic_number = cybox.TypedField("Magic_Number", HexBinary)
+    file_format = cybox.TypedField("File_Format", String)
+    hashes = cybox.TypedField("Hashes", HashList)
+    digital_signatures = cybox.TypedField("Digital_Signatures",
                                           DigitalSignatureList)
-    modified_time = fields.TypedField("Modified_Time", DateTime)
-    accessed_time = fields.TypedField("Accessed_Time", DateTime)
-    created_time = fields.TypedField("Created_Time", DateTime)
+    modified_time = cybox.TypedField("Modified_Time", DateTime)
+    accessed_time = cybox.TypedField("Accessed_Time", DateTime)
+    created_time = cybox.TypedField("Created_Time", DateTime)
     # Subclasses must redefine these, since the abstract types
     # cannot be instantiated.
-    file_attributes_list = fields.TypedField("File_Attributes_List",
+    file_attributes_list = cybox.TypedField("File_Attributes_List",
                                             FileAttribute)  # abstract
-    permissions = fields.TypedField("Permissions", FilePermissions) # abstract
-    user_owner = fields.TypedField("User_Owner", String)
-    packer_list = fields.TypedField("Packer_List", PackerList)
-    peak_entropy = fields.TypedField("Peak_Entropy", Double)
-    sym_links = fields.TypedField("Sym_Links", SymLinksList)
-    byte_runs = fields.TypedField("Byte_Runs", ByteRuns)
-    extracted_features = fields.TypedField("Extracted_Features",
+    permissions = cybox.TypedField("Permissions", FilePermissions) # abstract
+    user_owner = cybox.TypedField("User_Owner", String)
+    packer_list = cybox.TypedField("Packer_List", PackerList)
+    peak_entropy = cybox.TypedField("Peak_Entropy", Double)
+    sym_links = cybox.TypedField("Sym_Links", SymLinksList)
+    byte_runs = cybox.TypedField("Byte_Runs", ByteRuns)
+    extracted_features = cybox.TypedField("Extracted_Features",
                                           ExtractedFeatures)
-    encryption_algorithm = fields.TypedField("Encryption_Algorithm", String)
-    decryption_key = fields.TypedField("Decryption_Key", String)
-    compression_method = fields.TypedField("Compression_Method", String)
-    compression_version = fields.TypedField("Compression_Version", String)
-    compression_comment = fields.TypedField("Compression_Comment", String)
+    encryption_algorithm = cybox.TypedField("Encryption_Algorithm", String)
+    decryption_key = cybox.TypedField("Decryption_Key", String)
+    compression_method = cybox.TypedField("Compression_Method", String)
+    compression_version = cybox.TypedField("Compression_Version", String)
+    compression_comment = cybox.TypedField("Compression_Comment", String)
 
     def __init__(self):
         super(File, self).__init__()
@@ -253,3 +247,5 @@ class File(ObjectProperties):
             if self.hashes is None:
                 self.hashes = HashList()
             self.hashes.append(hash_)
+
+

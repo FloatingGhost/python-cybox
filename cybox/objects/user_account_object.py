@@ -1,22 +1,20 @@
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-from mixbox import entities
-from mixbox import fields
-
+import cybox
 import cybox.bindings.user_account_object as user_account_binding
 from cybox.common import DateTime, Duration, String
 from cybox.objects.account_object import Account
 
 
-class Group(entities.Entity):
+class Group(cybox.Entity):
     """An abstract class for account groups."""
 
     def __init__(self):
         raise TypeError("Cannot instantiate abstract type.")
 
 
-class GroupList(entities.EntityList):
+class GroupList(cybox.EntityList):
     _binding = user_account_binding
     _binding_class = user_account_binding.GroupListType
     _binding_var = 'Group'
@@ -24,14 +22,14 @@ class GroupList(entities.EntityList):
     _namespace = 'http://cybox.mitre.org/objects#UserAccountObject-2'
 
 
-class Privilege(entities.Entity):
+class Privilege(cybox.Entity):
     """An abstract class for account privileges."""
 
     def __init__(self):
         raise TypeError("Cannot instantiate abstract type.")
 
 
-class PrivilegeList(entities.EntityList):
+class PrivilegeList(cybox.EntityList):
     _binding = user_account_binding
     _binding_class = user_account_binding.PrivilegeListType
     _binding_var = 'Privilege'
@@ -46,14 +44,14 @@ class UserAccount(Account):
     _XSI_NS = "UserAccountObj"
     _XSI_TYPE = "UserAccountObjectType"
 
-    password_required = fields.TypedField('password_required')
-    full_name = fields.TypedField('Full_Name', String)
-    home_directory = fields.TypedField('Home_Directory', String)
-    last_login = fields.TypedField('Last_Login', DateTime)
-    script_path = fields.TypedField('Script_Path', String)
-    username = fields.TypedField('Username', String)
-    user_password_age = fields.TypedField('User_Password_Age', Duration)
+    password_required = cybox.TypedField('password_required')
+    full_name = cybox.TypedField('Full_Name', String)
+    home_directory = cybox.TypedField('Home_Directory', String)
+    last_login = cybox.TypedField('Last_Login', DateTime)
+    script_path = cybox.TypedField('Script_Path', String)
+    username = cybox.TypedField('Username', String)
+    user_password_age = cybox.TypedField('User_Password_Age', Duration)
 
     # These should be overriden by subclasses
-    group_list = fields.TypedField('Group_List', GroupList)
-    privilege_list = fields.TypedField('Privilege_List', PrivilegeList)
+    group_list = cybox.TypedField('Group_List', GroupList)
+    privilege_list = cybox.TypedField('Privilege_List', PrivilegeList)

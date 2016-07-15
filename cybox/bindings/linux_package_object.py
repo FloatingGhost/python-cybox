@@ -3,14 +3,14 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
 
 
 class LinuxPackageObjectType(cybox_common.ObjectPropertiesType):
     """The LinuxPackageObjectType type is intended to characterize Linux
     packages."""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, Architecture=None, Category=None, Description=None, Epoch=None, EVR=None, Name=None, Release=None, Vendor=None, Version=None):
@@ -310,7 +310,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

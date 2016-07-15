@@ -1,8 +1,7 @@
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-from mixbox import fields
-
+import cybox
 import cybox.bindings.socket_address_object as socket_address_binding
 from cybox.objects.address_object import Address
 from cybox.objects.port_object import Port
@@ -19,6 +18,6 @@ class SocketAddress(ObjectProperties):
 
     #TODO: make sure this is an IPV4 or IPV6 Address
     #TODO: choice between ip_address and hostname
-    ip_address = fields.TypedField("IP_Address", Address)
-    hostname = fields.TypedField("Hostname", Hostname)
-    port = fields.TypedField("Port", Port)
+    ip_address = cybox.TypedField("IP_Address", Address)
+    hostname = cybox.TypedField("Hostname", Hostname)
+    port = cybox.TypedField("Port", Port)

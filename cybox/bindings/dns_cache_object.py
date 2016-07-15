@@ -3,15 +3,16 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import dns_record_object
 
 
 class DNSCacheEntryType(GeneratedsSuper):
     """The DNSCacheEntryType type is intended to characterize a single
     entry in a system's DNS cache."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, DNS_Entry=None, TTL=None):
@@ -87,7 +88,7 @@ class DNSCacheEntryType(GeneratedsSuper):
 class DNSCacheObjectType(cybox_common.ObjectPropertiesType):
     """The DNSCacheObjectType type is intended to characterize entries in a
     system's DNS cache."""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, DNS_Cache_Entry=None):
@@ -311,7 +312,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

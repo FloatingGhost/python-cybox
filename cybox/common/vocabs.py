@@ -1,20 +1,16 @@
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-# TODO: This module should probably move to mixbox.
-
-from mixbox import entities
-from mixbox import fields
-from mixbox.vendor import six
-
+import cybox
 import cybox.bindings.cybox_common as common_binding
 from cybox.common import PatternFieldGroup
 from cybox.utils import normalize_to_xml, denormalize_from_xml
 
 
-class VocabField(fields.TypedField):
-    """TypedField subclass for VocabString fields."""
+class VocabField(cybox.TypedField):
+    """TypedField subclass for VocabString fields.
 
+    """
     def __init__(self, *args, **kwargs):
         """Intercepts the __init__() call to TypedField.
 
@@ -37,9 +33,9 @@ class VocabField(fields.TypedField):
         # should always be a subclass of VocabString.
         self.type_ = VocabString  # Force this so from_dict/from_obj works.
 
-    def _clean(self, value):
-        """Validate and clean a candidate value for this Vocab. This overrides
-        the ``_clean()`` method on :class:`.TypedField`.
+    def _handle_value(self, value):
+        """Handles the processing of the __set__ value. This overrides
+        the ``_handle_value()`` method on :class:`.TypedField`.
 
         1) If the value is ``None``, return ``None``
         2) If the value is an instance of ``VocabString``, return it.
@@ -62,7 +58,7 @@ class VocabField(fields.TypedField):
         raise ValueError(error)
 
 
-class VocabString(PatternFieldGroup, entities.Entity):
+class VocabString(PatternFieldGroup, cybox.Entity):
     _namespace = 'http://cybox.mitre.org/default_vocabularies-2'
     # All subclasses should override this
     _XSI_TYPE = None
@@ -121,7 +117,7 @@ class VocabString(PatternFieldGroup, entities.Entity):
         if not xsi_type:
             return VocabString
 
-        for (k, v) in six.iteritems(_VOCAB_MAP):
+        for (k, v) in _VOCAB_MAP.items():
             # TODO: for now we ignore the prefix and just check for
             # a partial match
             if xsi_type in k:
@@ -223,7 +219,7 @@ _VOCAB_MAP = {}
 
 def _get_terms(vocab_class):
     """Helper function used by register_vocab."""
-    for k, v in vocab_class.__dict__.items():
+    for k, v in list(vocab_class.__dict__.items()):
         if k.startswith("TERM_"):
             yield v
 

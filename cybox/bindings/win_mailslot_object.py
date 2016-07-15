@@ -3,15 +3,16 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import win_handle_object
 
 
 class WindowsMailslotObjectType(cybox_common.ObjectPropertiesType):
     """The WindowsMailslotObjectType is intended to characterize Windows
     mailslot objects."""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, Handle=None, Max_Message_Size=None, Name=None, Read_Timeout=None, Security_Attributes=None):
@@ -274,7 +275,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

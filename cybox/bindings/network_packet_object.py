@@ -3,8 +3,9 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import address_object
 from . import port_object
 
@@ -12,7 +13,7 @@ from . import port_object
 class LinkLayerType(GeneratedsSuper):
     """A link layer protocol is a hardware interface protocol, such as
     Ethernet, or a logical link routing protocol, such as ARP."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Physical_Interface=None, Logical_Protocols=None):
@@ -85,7 +86,7 @@ class LinkLayerType(GeneratedsSuper):
 class PhysicalInterfaceType(GeneratedsSuper):
     """Multiple interface types exist - only most common (Ethernet)
     included now. Others will be added later as needed."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Ethernet=None):
@@ -148,7 +149,7 @@ class PhysicalInterfaceType(GeneratedsSuper):
 class LogicalProtocolType(GeneratedsSuper):
     """Logical Protocols characterizes the logical protocol of a link layer
     connection. One example of a logical protocol is ARP."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, ARP_RARP=None, NDP=None):
@@ -222,7 +223,7 @@ class EthernetInterfaceType(GeneratedsSuper):
     """Ethernet sends network packets from the sending host to one or more
     receiving hosts. (REF: IEEE 802.3;
     http://wiki.wireshark.org/Ethernet)"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Ethernet_Header=None):
@@ -286,7 +287,7 @@ class EthernetHeaderType(GeneratedsSuper):
     """Ethernet header characterizes and ethernet header and includes
     information such as source MAC address, destination MAC address,
     and more."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Destination_MAC_Addr=None, Source_MAC_Addr=None, Type_Or_Length=None, Checksum=None):
@@ -382,7 +383,7 @@ class EthernetHeaderType(GeneratedsSuper):
 class TypeLengthType(GeneratedsSuper):
     """0-1500 then it is a length field. Otherwise, it defines the protocol
     type of the Internet layer."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Length=None, Internet_Layer_Type=None):
@@ -465,7 +466,7 @@ class ARPType(GeneratedsSuper):
     internetwork nodes. This property places ARP into the Link
     Layer. It is encapsulated. REF: http://www.comptechdoc.org/indep
     endent/networking/guide/netarp.html"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Hardware_Addr_Type=None, Proto_Addr_Type=None, Hardware_Addr_Size=None, Proto_Addr_Size=None, Op_Type=None, Sender_Hardware_Addr=None, Sender_Protocol_Addr=None, Recip_Hardware_Addr=None, Recip_Protocol_Addr=None):
@@ -621,7 +622,7 @@ class NDPType(GeneratedsSuper):
     """NDP Type characterizes NDP (Neighbor Discover Protocol) IPv6
     packets. NDP defines five ICMPv6 packet types. RFC 2461:
     http://tools.ietf.org/html/rfc4861"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, ICMPv6_Header=None, Router_Solicitation=None, Router_Advertisement=None, Neighbor_Solicitation=None, Neighbor_Advertisement=None, Redirect=None):
@@ -734,7 +735,7 @@ class NDPType(GeneratedsSuper):
 class RouterSolicitationType(GeneratedsSuper):
     """Hosts send Router Solicitations in order to prompt routers to
     generate Router Advertisements quickly.(type=133; code=0)"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Options=None):
@@ -802,7 +803,7 @@ class RouterSolicitationType(GeneratedsSuper):
 class RouterSolicitationOptionsType(GeneratedsSuper):
     """Neighbor Discovery messages include zero or more options, some of
     which may appear multiple times in the same message."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Src_Link_Addr=None):
@@ -874,7 +875,7 @@ class RouterAdvertisementType(GeneratedsSuper):
     available via DHCPv6. Examples of such information are DNS-
     related information or information on other servers within the
     network."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, other_config_flag=None, managed_address_config_flag=None, Cur_Hop_Limit=None, Router_Lifetime=None, Reachable_Time=None, Retrans_Timer=None, Options=None):
@@ -1008,7 +1009,7 @@ class RouterAdvertisementType(GeneratedsSuper):
 class RouterAdvertisementOptionsType(GeneratedsSuper):
     """Router Advertisement messages include zero or more options, some of
     which may appear multiple times in the same message."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Src_Link_Addr=None, MTU=None, Prefix_Info=None):
@@ -1095,7 +1096,7 @@ class NeighborSolicitationType(GeneratedsSuper):
     the node needs to resolve an address and unicast when the node
     seeks to verify the reachability of a neighbor. (type=135;
     code=0)"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Target_IPv6_Addr=None, Options=None):
@@ -1168,7 +1169,7 @@ class NeighborSolicitationType(GeneratedsSuper):
 class NeighborSolicitationOptionsType(GeneratedsSuper):
     """Neighbor Solicitation messages include zero or more options, some of
     which may appear multiple times in the same message."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Src_Link_Addr=None):
@@ -1242,7 +1243,7 @@ class NeighborAdvertisementType(GeneratedsSuper):
     Detection.Override flag. When set, the O-bit indicates that the
     advertisement should override an existing cache entry and update
     the cached link-layer address."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, override_flag=None, router_flag=None, solicited_flag=None, Target_IPv6_Addr=None, Options=None):
@@ -1358,7 +1359,7 @@ class NeighborAdvertisementType(GeneratedsSuper):
 class NeighborOptionsType(GeneratedsSuper):
     """Neighbor Advertisement messages include zero or more options, some
     of which may appear multiple times in the same message."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Target_Link_Addr=None):
@@ -1425,7 +1426,7 @@ class RedirectType(GeneratedsSuper):
     that the destination is in fact a neighbor. The latter is
     accomplished by setting the ICMP Target Address equal to the
     ICMP Destination Address. (type=137; code=0)"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Target_IPv6_Addr=None, Dest_IPv6_Addr=None, Options=None):
@@ -1508,7 +1509,7 @@ class RedirectType(GeneratedsSuper):
 class RedirectOptionsType(GeneratedsSuper):
     """Redirect messages include zero or more options, some of which may
     appear multiple times in the same message."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Target_Link_Addr=None, Redirected_Header=None):
@@ -1661,7 +1662,7 @@ class NDPPrefixInfoType(GeneratedsSuper):
     properties of the prefix.1-bit autonomous address-configuration
     flag. When set indicates that this prefix can be usd for
     stateless address configuration."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, addr_config_flag=None, link_flag=None, Length=None, Prefix_Length=None, Valid_Lifetime=None, Preferred_Lifetime=None, Prefix=None):
@@ -1796,7 +1797,7 @@ class NDPRedirectedHeaderType(GeneratedsSuper):
     """The redirected header option is used in redirect messages and
     contains all or part of the packet that is being redirected.
     (type=4)"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Length=None, IPHeader_And_Data=None):
@@ -1876,7 +1877,7 @@ class NDPMTUType(GeneratedsSuper):
     """The MTU option is used in Router Advertisement messages to ensure
     that all nodes on a link use the same MTU value in those cases
     where the link MTU is not well known. (type=5)."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Length=None, MTU=None):
@@ -1956,7 +1957,7 @@ class InternetLayerType(GeneratedsSuper):
     currently defined, just those most commonly used: IPv4, ICMPv4,
     IPv6, ICMPv6. Other protocols will be added as needed.
     (http://en.wikipedia.org/wiki/Internet_layer)"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, IPv4=None, ICMPv4=None, IPv6=None, ICMPv6=None):
@@ -2050,7 +2051,7 @@ class IPv4PacketType(GeneratedsSuper):
     """Internet Protocol version 4 (IPv4) is a connectionless protocol for
     use on packet-switched link layer networks (e.g., Ethernet).
     REF: RFC 791; http://en.wikipedia.org/wiki/IPv4."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, IPv4_Header=None, Data=None):
@@ -2128,7 +2129,7 @@ class IPv4HeaderType(GeneratedsSuper):
     in the header to fragment and reassemble internet datagrams when
     necessary for transmission through small packet networks. REF:
     RFC 791."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, IP_Version=None, Header_Length=None, DSCP=None, ECN=None, Total_Length=None, Identification=None, Flags=None, Fragment_Offset=None, TTL=None, Protocol=None, Checksum=None, Src_IPv4_Addr=None, Dest_IPv4_Addr=None, Option=None):
@@ -2343,7 +2344,7 @@ class IPv4FlagsType(GeneratedsSuper):
     packet. It is a three-bit field, each of the three bits are
     defined by a field with a string value that indicates the
     meaning of whether or not the bit is set."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Reserved=None, Do_Not_Fragment=None, More_Fragments=None):
@@ -2435,7 +2436,7 @@ class IPv4FlagsType(GeneratedsSuper):
 class IPv4OptionType(GeneratedsSuper):
     """The IPv4 option field is variable in length with zero or more
     options."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Copy_Flag=None, Class=None, Option=None):
@@ -2529,7 +2530,7 @@ class IPv6PacketType(GeneratedsSuper):
     like IPv4 it is a connectionless protocol for use on packet-
     switched link layer networks. RFC 3513, RFC 2460,
     http://en.wikipedia.org/wiki/IPv6."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, IPv6_Header=None, Data=None, Ext_Headers=None):
@@ -2616,7 +2617,7 @@ class IPv6PacketType(GeneratedsSuper):
 
 class IPv6HeaderType(GeneratedsSuper):
     """The IPv6 header is a simplification of the IPv4 header."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, IP_Version=None, Traffic_Class=None, Flow_Label=None, Payload_Length=None, Next_Header=None, TTL=None, Src_IPv6_Addr=None, Dest_IPv6_Addr=None):
@@ -2765,7 +2766,7 @@ class IPv6ExtHeaderType(GeneratedsSuper):
     one, or more extension headers, each identified by the Next
     Header field of the preceding header.
     http://tools.ietf.org/html/rfc2460"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Hop_by_Hop_Options=None, Routing=None, Fragment=None, Destination_Options=None, Authentication_Header=None, Encapsulating_Security_Payload=None):
@@ -2882,7 +2883,7 @@ class IPv6ExtHeaderType(GeneratedsSuper):
 
 class IPv6OptionType(GeneratedsSuper):
     """Specifies the meaning of each bit of the 8-bit IPv6OptionType type."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Do_Not_Recogn_Action=None, Packet_Change=None, Option_Byte=None):
@@ -2974,7 +2975,7 @@ class IPv6OptionType(GeneratedsSuper):
 class TransportLayerType(GeneratedsSuper):
     """only UDP and TCP defined to begin. Other protocols will be defined
     as necessary."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, TCP=None, UDP=None):
@@ -3048,7 +3049,7 @@ class TCPType(GeneratedsSuper):
     """TCP provides reliable, ordered delivery of a stream of bytes from a
     prograom on one computer to another program on another computer.
     http://en.wikipedia.org/wiki/Transmission_Control_Protocol"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, TCP_Header=None, Options=None, Data=None):
@@ -3138,7 +3139,7 @@ class UDPType(GeneratedsSuper):
     datagrams may arrive out of order, appear duplicated, or go
     missing without notice.
     http://en.wikipedia.org/wiki/User_Datagram_Protocol"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, UDP_Header=None, Data=None):
@@ -3212,7 +3213,7 @@ class TCPHeaderType(GeneratedsSuper):
     """The TCP header contains 10 mandatory fields and an optional
     extension field.
     http://en.wikipedia.org/wiki/Transmission_Control_Protocol"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Src_Port=None, Dest_Port=None, Seq_Num=None, ACK_Num=None, Data_Offset=None, Reserved=None, TCP_Flags=None, Window=None, Checksum=None, Urg_Ptr=None):
@@ -3387,7 +3388,7 @@ class TCPFlagsType(GeneratedsSuper):
     packet sent from each end should have this flag set.
     http://en.wikipedia.org/wiki/Transmission_Control_ProtocolIf
     this flag is set, it means there is no more data from sender."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, ece=None, urg=None, ack=None, cwr=None, psh=None, syn=None, rst=None, ns=None, fin=None):
@@ -3571,7 +3572,7 @@ class TCPFlagsType(GeneratedsSuper):
 
 class UDPHeaderType(GeneratedsSuper):
     """The UDP header type defines the four fields in the UDP header."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, SrcPort=None, DestPort=None, Length=None, Checksum=None):
@@ -3672,7 +3673,7 @@ class ICMPv4PacketType(GeneratedsSuper):
     its destination), informational messages ( e.g., timestamp
     information), or a traceroute message. REF:
     http://www.networksorcery.com/enp/protocol/icmp.htm"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, ICMPv4_Header=None, Error_Msg=None, Info_Msg=None, Traceroute=None):
@@ -3765,7 +3766,7 @@ class ICMPv4PacketType(GeneratedsSuper):
 class ICMPv4HeaderType(GeneratedsSuper):
     """Actual ICMP header bytes are defined, corresponding to the ICMP
     type, ICMP code, and to the checksum."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Type=None, Code=None, Checksum=None):
@@ -3851,7 +3852,7 @@ class ICMPv4HeaderType(GeneratedsSuper):
 class ICMPv4ErrorMessageType(GeneratedsSuper):
     """ICMP error messages include destination unreachable messages, source
     quench messages, redirect messages, and time exceeded messages."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Destination_Unreachable=None, Source_Quench=None, Redirect_Message=None, Time_Exceeded=None, Error_Msg_Content=None):
@@ -3954,7 +3955,7 @@ class ICMPv4ErrorMessageType(GeneratedsSuper):
 class ICMPv4ErrorMessageContentType(GeneratedsSuper):
     """Elements associated with ICMPv4 error messages (as opposed to ICMP
     informational messages or ICMP traceroute message)."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, IP_Header=None, First_Eight_Bytes=None):
@@ -4030,7 +4031,7 @@ class ICMPv4ErrorMessageContentType(GeneratedsSuper):
 class ICMPv4InfoMessageType(GeneratedsSuper):
     """ICMP informational messages include echo request/reply, timestamp
     request/reply, and address mask request/reply."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Echo_Reply=None, Echo_Request=None, Timestamp_Request=None, Timestamp_Reply=None, Address_Mask_Request=None, Address_Mask_Reply=None, Info_Msg_Content=None):
@@ -4153,7 +4154,7 @@ class ICMPv4InfoMessageType(GeneratedsSuper):
 class ICMPv4InfoMessageContentType(GeneratedsSuper):
     """Elements associated with ICMPv4 informational messages (as opposed
     to ICMP error messages or ICMP traceroute message)."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Identifier=None, Sequence_Number=None):
@@ -4231,7 +4232,7 @@ class ICMPv4TracerouteType(GeneratedsSuper):
     ICMP error messages or ICMP informational messages); corresponds
     to ICMP type =30.
     (http://www.networksorcery.com/enp/protocol/icmp/msg30.htm)"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Outbound_Packet_Forward_Success=None, Outbound_Packet_no_Route=None, Identifier=None, Outbound_Hop_Count=None, Return_Hop_Count=None, Output_Link_Speed=None, Output_Link_MTU=None):
@@ -4376,7 +4377,7 @@ class ICMPv6PacketType(GeneratedsSuper):
     http://tools.ietf.org/html/rfc4443 and
     http://www.networksorcery.com/enp/protocol/icmpv6.htm and
     http://en.wikipedia.org/wiki/ICMPv6."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, ICMPv6_Header=None, Error_Msg=None, Info_Msg=None):
@@ -4462,7 +4463,7 @@ class ICMPv6HeaderType(GeneratedsSuper):
     and code byte are defined in text by using boolean values
     associated with corresponding elements in the informational and
     error message type elements."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Type=None, Code=None, Checksum=None):
@@ -4550,7 +4551,7 @@ class ICMPv6ErrorMessageType(GeneratedsSuper):
     packet too big messages, and time exceeded messages, and
     parameter problem messages, as defined in RFC 2463. Type values
     of ICMP v6 error messages range from 1 to 127."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Destination_Unreachable=None, Packet_Too_Big=None, Time_Exceeded=None, Parameter_Problem=None, Invoking_Packet=None):
@@ -4658,7 +4659,7 @@ class ICMPv6InfoMessageType(GeneratedsSuper):
     informational message types will be added in the future as they
     are more commonly used (only echo request/reply are defined in
     RFC 4443)."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Echo_Request=None, Echo_Reply=None, Info_Msg_Content=None):
@@ -4741,7 +4742,7 @@ class ICMPv6InfoMessageType(GeneratedsSuper):
 class ICMPv6InfoMessageContentType(GeneratedsSuper):
     """Elements associated with ICMPv6 informational messages (as opposed
     to ICMP v6 error messages)."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Identifier=None, Sequence_Number=None):
@@ -4816,7 +4817,7 @@ class ICMPv6InfoMessageContentType(GeneratedsSuper):
 
 class ICMPv4EchoReplyType(GeneratedsSuper):
     """Echo reply v4 informational message (used to ping); ICMP type=0."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Echo_Reply=None, Data=None):
@@ -4897,7 +4898,7 @@ class ICMPv4EchoReplyType(GeneratedsSuper):
 
 class ICMPv4DestinationUnreachableType(GeneratedsSuper):
     """Destination Unreachable error message; ICMP type=3."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Destination_Network_Unreachable=None, Destination_Host_Unreachable=None, Destination_Protocol_Unreachable=None, Destination_Port_Unreachable=None, Fragmentation_Required=None, Source_Route_Failed=None, Destination_Network_Unknown=None, Destination_Host_Unknown=None, Source_Host_Isolated=None, Network_Administratively_Prohibited=None, Host_Administratively_Prohibited=None, Network_Unreachable_For_TOS=None, Host_Unreachable_For_TOS=None, Communication_Administratively_Prohibited=None, Host_Precedence_Violation=None, Precedence_Cutoff_In_Effect=None):
@@ -5216,7 +5217,7 @@ class FragmentationRequiredType(GeneratedsSuper):
     """This further specifies an ICMP destination unreachable (type=3)
     message of code=4 (fragmentation required) message by providing
     a Next-Hop MTU field."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Fragmentation_Required=None, Next_Hop_MTU=None):
@@ -5297,7 +5298,7 @@ class FragmentationRequiredType(GeneratedsSuper):
 
 class ICMPv4SourceQuenchType(GeneratedsSuper):
     """Source Quench (congestion control) error message; ICMP type=4."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Source_Quench=None):
@@ -5365,7 +5366,7 @@ class ICMPv4SourceQuenchType(GeneratedsSuper):
 
 class ICMPv4RedirectMessageType(GeneratedsSuper):
     """Redirect Message error message; ICMP type=5."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Network_Redirect=None, Host_Redirect=None, ToS_Network_Redirect=None, ToS_Host_Redirect=None, IP_Address=None):
@@ -5495,7 +5496,7 @@ class ICMPv4RedirectMessageType(GeneratedsSuper):
 
 class ICMPv4EchoRequestType(GeneratedsSuper):
     """Echo Request informational message (used to ping); ICMP type=8."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Echo_Request=None, Data=None):
@@ -5576,7 +5577,7 @@ class ICMPv4EchoRequestType(GeneratedsSuper):
 
 class ICMPv4TimeExceededType(GeneratedsSuper):
     """Time Exceeded error message; ICMP type=11."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, TTL_Exceeded_In_Transit=None, Frag_Reassembly_Time_Exceeded=None):
@@ -5662,7 +5663,7 @@ class ICMPv4TimeExceededType(GeneratedsSuper):
 
 class ICMPv4TimestampRequestType(GeneratedsSuper):
     """Time Stamp Request informational message; ICMP type=13."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Timestamp=None, Originate_Timestamp=None):
@@ -5741,7 +5742,7 @@ class ICMPv4TimestampRequestType(GeneratedsSuper):
 
 class ICMPv4TimestampReplyType(GeneratedsSuper):
     """Time Stamp Reply informational message; ICMP type=14."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Timestamp_Reply=None, Originate_Timestamp=None, Receive_Timestamp=None, Transmit_Timestamp=None):
@@ -5839,7 +5840,7 @@ class ICMPv4TimestampReplyType(GeneratedsSuper):
 
 class ICMPv4AddressMaskRequestType(GeneratedsSuper):
     """Address Mask Request informational message; ICMP type=17."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Address_Mask_Request=None, Address_Mask=None):
@@ -5917,7 +5918,7 @@ class ICMPv4AddressMaskRequestType(GeneratedsSuper):
 
 class ICMPv4AddressMaskReplyType(GeneratedsSuper):
     """Address Mask informational message; ICMP type=18."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Address_Mask_Reply=None, Address_Mask=None):
@@ -5995,7 +5996,7 @@ class ICMPv4AddressMaskReplyType(GeneratedsSuper):
 
 class ICMPv6DestinationUnreachableType(GeneratedsSuper):
     """Destination unreachable error message; ICMP v6 type=1."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, No_Route=None, Comm_Prohibited=None, Beyond_Scope=None, Address_Unreachable=None, Port_Unreachable=None, Src_Addr_Failed_Policy=None, Reject_Route=None):
@@ -6166,7 +6167,7 @@ class ICMPv6DestinationUnreachableType(GeneratedsSuper):
 
 class ICMPv6PacketTooBigType(GeneratedsSuper):
     """Packet too big error message; ICMP v6 type=2."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Packet_Too_Big=None, MTU=None):
@@ -6247,7 +6248,7 @@ class ICMPv6PacketTooBigType(GeneratedsSuper):
 
 class ICMPv6TimeExceededType(GeneratedsSuper):
     """Time exceeded error message; ICMP v6 type=3."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Hop_Limit_Exceeded=None, Fragment_Reassem_Time_Exceeded=None):
@@ -6333,7 +6334,7 @@ class ICMPv6TimeExceededType(GeneratedsSuper):
 
 class ICMPv6ParameterProblemType(GeneratedsSuper):
     """Parameter problem error message; ICMP v6 type=4."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Erroneous_Header_Field=None, Unrecognized_Next_Header_Type=None, Unrecognized_IPv6_Option=None, Pointer=None):
@@ -6449,7 +6450,7 @@ class ICMPv6ParameterProblemType(GeneratedsSuper):
 
 class ICMPv6EchoRequestType(GeneratedsSuper):
     """Echo request informational ICMP v6 message; type=128."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Echo_Request=None, Data=None):
@@ -6530,7 +6531,7 @@ class ICMPv6EchoRequestType(GeneratedsSuper):
 
 class ICMPv6EchoReplyType(GeneratedsSuper):
     """Echo reply informational ICMP v6 message; type=129."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Echo_Reply=None, Data=None):
@@ -6612,7 +6613,7 @@ class ICMPv6EchoReplyType(GeneratedsSuper):
 class PrefixType(GeneratedsSuper):
     """Provides an IP address or a prefix of an IP address for NDP for
     IPv6."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, IPv6_Addr=None, IP_Addr_Prefix=None):
@@ -6686,7 +6687,7 @@ class HopByHopOptionsType(GeneratedsSuper):
     """Defines fields for the IPv6 Hop-by-Hop Options header which is used
     to carry optional information that must be examined by every
     node along a packet's delivery path."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Next_Header=None, Header_Ext_Len=None, Option_Data=None):
@@ -6782,7 +6783,7 @@ class OptionDataType(GeneratedsSuper):
     headers (the Hop-by-Hop Options header and the Destination
     Options header). Contains one or more type-length-value
     (TLV)-encoded options."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Option_Type=None, Option_Data_Len=None, Pad1=None, PadN=None):
@@ -6880,7 +6881,7 @@ class RoutingType(GeneratedsSuper):
     source to list one or more intermediate nodes to be "visited" on
     the way to a packet's destination.
     http://tools.ietf.org/html/rfc2460"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Next_Header=None, Header_Ext_Len=None, Routing_Type=None, Segments_Left=None, Type_Specific_Data=None):
@@ -6996,7 +6997,7 @@ class FragmentType(GeneratedsSuper):
     """Specifies the fields of the Fragment header, which is used by an
     IPv6 source to send a packet larger than would fit in the path
     MTU. http://tools.ietf.org/html/rfc2460"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Fragment_Header=None, Fragment=None):
@@ -7073,7 +7074,7 @@ class DestinationOptionsType(GeneratedsSuper):
     """Defines fields for the IPv6 Destination Options header which is used
     to carry optional information that needs to be examined only by
     a packet's destination node(s)."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Next_Header=None, Header_Ext_Len=None, Option_Data=None):
@@ -7169,7 +7170,7 @@ class AuthenticationHeaderType(GeneratedsSuper):
     integrity and data origin authentication for IP datagrams and to
     provide protection against replays.
     http://www.ietf.org/rfc/rfc2402.txt"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Next_Header=None, Header_Ext_Len=None, Security_Parameters_Index=None, Sequence_Number=None, Authentication_Data=None):
@@ -7280,7 +7281,7 @@ class EncapsulatingSecurityPayloadType(GeneratedsSuper):
     connectionless integrity, an anti-replay service (a form of
     partial sequence integrity), and limited traffic flow
     confidentiality. http://www.ietf.org/rfc/rfc2406.txt"""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Security_Parameters_Index=None, Sequence_Number=None, Payload_Data=None, Padding=None, Padding_Len=None, Next_Header=None, Authentication_Data=None):
@@ -7410,7 +7411,7 @@ class Pad1Type(GeneratedsSuper):
     """The Pad1 type specifies how one octet of padding is inserted into
     the Options area of a header. The Pad1 option type does not have
     length and value fields."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Octet=None):
@@ -7476,7 +7477,7 @@ class Pad1Type(GeneratedsSuper):
 class PadNType(GeneratedsSuper):
     """The PadN type specifies how two or more octets of padding are
     inserted into the Options area of a header."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Octet=None, Option_Data_Length=None, Option_Data=None):
@@ -7566,7 +7567,7 @@ class FragmentHeaderType(GeneratedsSuper):
     """Each fragment has a header containing next header information, the
     offset of the fragment, an M flag specifying whether or not it
     is the last fragment, and an identification value."""
-
+    
     subclass = None
     superclass = None
     def __init__(self, Next_Header=None, Fragment_Offset=None, M_Flag=None, Identification=None):
@@ -7669,7 +7670,7 @@ class MFlagType(cybox_common.BaseObjectPropertyType):
     regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -7742,7 +7743,7 @@ class IANAPortNumberRegistryType(cybox_common.BaseObjectPropertyType):
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -7815,12 +7816,11 @@ class IANAAssignedIPNumbersType(cybox_common.BaseObjectPropertyType):
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
-    def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
-        # PROP: This is a BaseObjectPropertyType subclass
-        super(IANAAssignedIPNumbersType, self).__init__(obfuscation_algorithm_ref, refanging_transform_type, has_changed, delimiter, pattern_type, datatype, refanging_transform, is_case_sensitive, bit_mask, appears_random, observed_encoding, defanging_algorithm_ref, is_obfuscated, regex_syntax, apply_condition, trend, idref, is_defanged, id, condition, valueOf_)
+    def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, pattern_type=None, datatype='string', refanging_transform=None, bit_mask=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(IANAAssignedIPNumbersType, self).__init__(obfuscation_algorithm_ref, refanging_transform_type, has_changed, pattern_type, datatype, refanging_transform, bit_mask, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, apply_condition, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -7889,7 +7889,7 @@ class IANAEtherType(cybox_common.BaseObjectPropertyType):
     (i.e. regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -7962,7 +7962,7 @@ class IANAHardwareType(cybox_common.BaseObjectPropertyType):
     (i.e. regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -8037,7 +8037,7 @@ class IPVersionType(cybox_common.BaseObjectPropertyType):
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -8110,7 +8110,7 @@ class IPv6PacketChangeType(cybox_common.BaseObjectPropertyType):
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -8184,7 +8184,7 @@ class IPv6DoNotRecogActionType(cybox_common.BaseObjectPropertyType):
     expression based) specifications.This attribute is optional and
     specifies the expected type for the value of the specified
     property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -8257,7 +8257,7 @@ class IPv4OptionsType(cybox_common.BaseObjectPropertyType):
     regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -8330,7 +8330,7 @@ class IPv4ClassType(cybox_common.BaseObjectPropertyType):
     regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -8403,7 +8403,7 @@ class IPv4CopyFlagType(cybox_common.BaseObjectPropertyType):
     (i.e. regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -8476,7 +8476,7 @@ class MoreFragmentsType(cybox_common.BaseObjectPropertyType):
     permitting complex (i.e. regular-expression based)
     specifications.This attribute is optional and specifies the
     expected type for the value of the specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -8549,12 +8549,11 @@ class DoNotFragmentType(cybox_common.BaseObjectPropertyType):
     (i.e. regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
-    def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
-        # PROP: This is a BaseObjectPropertyType subclass
-        super(DoNotFragmentType, self).__init__(obfuscation_algorithm_ref, refanging_transform_type, has_changed, delimiter, pattern_type, datatype, refanging_transform, is_case_sensitive, bit_mask, appears_random, observed_encoding, defanging_algorithm_ref, is_obfuscated, regex_syntax, apply_condition, trend, idref, is_defanged, id, condition, valueOf_)
+    def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, pattern_type=None, datatype='string', refanging_transform=None, bit_mask=None, appears_random=None, trend=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
+        super(DoNotFragmentType, self).__init__(obfuscation_algorithm_ref, refanging_transform_type, has_changed, pattern_type, datatype, refanging_transform, bit_mask, appears_random, trend, defanging_algorithm_ref, is_obfuscated, regex_syntax, apply_condition, idref, is_defanged, id, condition, valueOf_, )
         self.datatype = _cast(None, datatype)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -8623,7 +8622,7 @@ class ARPOpType(cybox_common.BaseObjectPropertyType):
     regular-expression based) specifications.This attribute is
     optional and specifies the expected type for the value of the
     specified property."""
-
+    
     subclass = None
     superclass = cybox_common.BaseObjectPropertyType
     def __init__(self, obfuscation_algorithm_ref=None, refanging_transform_type=None, has_changed=None, delimiter='##comma##', pattern_type=None, datatype='string', refanging_transform=None, is_case_sensitive=True, bit_mask=None, appears_random=None, observed_encoding=None, defanging_algorithm_ref=None, is_obfuscated=None, regex_syntax=None, apply_condition='ANY', trend=None, idref=None, is_defanged=None, id=None, condition=None, valueOf_=None):
@@ -8697,7 +8696,7 @@ class NetworkPacketObjectType(cybox_common.ObjectPropertiesType):
     defines the physical network interfaces and routing protocols.
     Protocol fields are provided but requirements are not
     enforced/captured; all fields are optional."""
-
+    
     subclass = None
     superclass = cybox_common.ObjectPropertiesType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, Link_Layer=None, Internet_Layer=None, Transport_Layer=None):
@@ -9010,7 +9009,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

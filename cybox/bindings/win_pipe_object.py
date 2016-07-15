@@ -3,8 +3,9 @@
 
 import sys
 
-from mixbox.binding_utils import *
+from cybox.bindings import *
 from . import cybox_common
+
 from . import pipe_object
 from . import win_handle_object
 
@@ -12,7 +13,7 @@ from . import win_handle_object
 class WindowsPipeObjectType(pipe_object.PipeObjectType):
     """The WindowsPipeObjectType type is intended to characterize Windows
     pipes."""
-
+    
     subclass = None
     superclass = pipe_object.PipeObjectType
     def __init__(self, object_reference=None, Custom_Properties=None, xsi_type=None, named=None, Name=None, Default_Time_Out=None, Handle=None, In_Buffer_Size=None, Max_Instances=None, Open_Mode=None, Out_Buffer_Size=None, Pipe_Mode=None, Security_Attributes=None):
@@ -313,7 +314,7 @@ def parseEtree(inFileName):
     return rootObj, rootElement
 
 def parseString(inString):
-    from mixbox.vendor.six import StringIO
+    from io import StringIO
     doc = parsexml_(StringIO(inString))
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)

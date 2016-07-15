@@ -1,21 +1,19 @@
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-from mixbox import entities
-from mixbox import fields
-
+import cybox
 import cybox.bindings.win_user_account_object as win_user_binding
 from cybox.common import String
 from cybox.objects.user_account_object import (GroupList, PrivilegeList,
         UserAccount)
 
 
-class WinGroup(entities.Entity):
+class WinGroup(cybox.Entity):
     _binding = win_user_binding
     _binding_class = win_user_binding.WindowsGroupType
     _namespace = 'http://cybox.mitre.org/objects#WinUserAccountObject-2'
 
-    name = fields.TypedField("Name", String)
+    name = cybox.TypedField("Name", String)
 
     # TODO: Allow these to be represented as single strings in to/from_dict
 
@@ -24,12 +22,12 @@ class WinGroupList(GroupList):
     _contained_type = WinGroup
 
 
-class WinPrivilege(entities.Entity):
+class WinPrivilege(cybox.Entity):
     _binding = win_user_binding
     _binding_class = win_user_binding.WindowsPrivilegeType
     _namespace = 'http://cybox.mitre.org/objects#WinUserAccountObject-2'
 
-    user_right = fields.TypedField("User_Right", String)
+    user_right = cybox.TypedField("User_Right", String)
 
     # TODO: Allow these to be represented as single strings in to/from_dict
 
@@ -45,9 +43,9 @@ class WinUser(UserAccount):
     _XSI_NS = "WinUserAccountObj"
     _XSI_TYPE = "WindowsUserAccountObjectType"
 
-    security_id = fields.TypedField('Security_ID', String)
-    security_type = fields.TypedField('Security_Type', String)
+    security_id = cybox.TypedField('Security_ID', String)
+    security_type = cybox.TypedField('Security_Type', String)
 
     #Override abstract types here
-    group_list = fields.TypedField('Group_List', WinGroupList)
-    privilege_list = fields.TypedField('Privilege_List', WinPrivilegeList)
+    group_list = cybox.TypedField('Group_List', WinGroupList)
+    privilege_list = cybox.TypedField('Privilege_List', WinPrivilegeList)

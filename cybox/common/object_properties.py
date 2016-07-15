@@ -1,11 +1,9 @@
 # Copyright (c) 2015, The MITRE Corporation. All rights reserved.
 # See LICENSE.txt for complete terms.
 
-from mixbox import entities
-from mixbox import fields
-
+import cybox
+import cybox.utils
 import cybox.bindings.cybox_common as common_binding
-import cybox.objects
 
 from .properties import String
 
@@ -65,7 +63,7 @@ class Property(String):
         return prop
 
 
-class CustomProperties(entities.EntityList):
+class CustomProperties(cybox.EntityList):
     _binding = common_binding
     _binding_class = common_binding.CustomPropertiesType
     _binding_var = "Property"
@@ -73,11 +71,11 @@ class CustomProperties(entities.EntityList):
     _namespace = 'http://cybox.mitre.org/common-2'
 
 
-class ObjectProperties(entities.Entity):
+class ObjectProperties(cybox.Entity):
     """The Cybox ObjectProperties base class."""
 
-    object_reference = fields.TypedField("object_reference")
-    custom_properties = fields.TypedField("Custom_Properties", CustomProperties)
+    object_reference = cybox.TypedField("object_reference")
+    custom_properties = cybox.TypedField("Custom_Properties", CustomProperties)
 
     def __init__(self):
         super(ObjectProperties, self).__init__()
@@ -86,16 +84,12 @@ class ObjectProperties(entities.Entity):
 
     @property
     def parent(self):
-        import cybox.core
-
         if not self._parent:
             self._parent = cybox.core.Object(self)
         return self._parent
 
     @parent.setter
     def parent(self, value):
-        import cybox.core
-
         if value and not isinstance(value, cybox.core.Object):
             raise ValueError("Must be an Object")
         self._parent = value
@@ -120,7 +114,6 @@ class ObjectProperties(entities.Entity):
     def _finalize_obj(self, partial_obj=None):
         """Add xsi_type to the binding object."""
 
-        # The _XSI_NS and _XSI_TYPE are set by concrete implementations.
         partial_obj.xsi_type = "%s:%s" % (self._XSI_NS, self._XSI_TYPE)
 
     def to_dict(self, partial_dict=None):
@@ -146,7 +139,7 @@ class ObjectProperties(entities.Entity):
         # ObjectProperties class, then we don't know the xsi_type of the
         # ObjectProperties, so we need to look it up. Otherwise, if this is
         # being called on a particular subclass of ObjectProperties (for
-        # example, Address), we can skip directly to the entities.Entity
+        # example, Address), we can skip directly to the cybox.Entity
         # implementation.
         if cls is not ObjectProperties:
             return super(ObjectProperties, cls()).from_obj(defobj_obj)
@@ -161,7 +154,7 @@ class ObjectProperties(entities.Entity):
             type_value = xsi_type.split(':')[1]
 
             # Find the class that can parse this type.
-            klass = cybox.objects.get_class_for_object_type(type_value)
+            klass = cybox.utils.get_class_for_object_type(type_value)
             defobj = klass.from_obj(defobj_obj)
 
         defobj.object_reference = defobj_obj.object_reference
@@ -183,7 +176,7 @@ class ObjectProperties(entities.Entity):
             if not xsi_type:
                 raise ValueError('dictionary does not have xsi:type key')
 
-            klass = cybox.objects.get_class_for_object_type(xsi_type)
+            klass = cybox.utils.get_class_for_object_type(xsi_type)
             defobj = klass.from_dict(defobj_dict)
 
         defobj.object_reference = defobj_dict.get('object_reference')
